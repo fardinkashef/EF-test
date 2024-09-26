@@ -1,0 +1,103 @@
+.NavBar {
+  background-color: #98fb98;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  height: 70px;
+  padding: 5px 25px;
+}
+.NavBar h3 {
+  width: 100px;
+  text-align: center;
+}
+.NavBar nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+}
+.NavBar .hidden {
+  display: none;
+}
+.NavBar nav ul {
+  background-color: palegreen;
+  list-style: none;
+  text-align: center;
+}
+.NavBar nav ul li {
+  width: 100%;
+  cursor: pointer;
+  font-size: large;
+}
+.NavBar nav ul li:hover {
+  background-color: bisque;
+}
+.NavBar nav ul li a {
+  text-decoration: none;
+  color: black;
+  display: block;
+  padding: 5px 0;
+}
+
+.NavBar .menu-button {
+  background-image: url("assets/icons/menu.svg");
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+  border: none;
+  border-radius: 5px;
+  background-color: #6a6a1e;
+  background-size: cover;
+  border: solid 2px black;
+}
+.NavBar .menu-button:hover {
+  background-color: green;
+}
+.NavBar .active {
+  background-color: cyan;
+  font-weight: 500;
+}
+.NavBar .logo {
+  background-image: url(assets/icons/logo.svg);
+  width: 60px;
+  height: 60px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+}
+@media screen and (min-width: 650px) {
+  .NavBar .menu-button {
+    display: none;
+  }
+  .NavBar #nav {
+    display: block;
+    position: static;
+    width: fit-content;
+    flex-grow: 1;
+  }
+  .NavBar #nav ul {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .NavBar #nav ul li {
+    background-color: inherit;
+    width: fit-content;
+    margin-left: 30px;
+  }
+  .NavBar #nav ul li a:hover {
+    color: firebrick;
+    font-weight: 600;
+  }
+  .NavBar .active {
+    background-color: inherit;
+    font-weight: 600;
+    color: navy;
+    border-bottom: solid 3px;
+  }
+  .NavBar .logo {
+    border: none;
+  }
+}

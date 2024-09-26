@@ -1,0 +1,8 @@
+.LoadingNote {
+  margin-top: 4rem;
+}
+.LoadingNote p {
+  max-width: 350px;
+  text-align: center;
+  margin: 0 auto;
+}

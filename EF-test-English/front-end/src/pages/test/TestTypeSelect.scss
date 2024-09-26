@@ -1,0 +1,64 @@
+.TestTypeSelect {
+  background-color: #dbf9d8;
+  padding: 10px;
+  flex-grow: 1;
+  /* min-height: 100vh; */
+}
+.TestTypeSelect section {
+  max-width: 300px;
+  margin: 40px auto;
+  padding: 10px;
+  border-radius: 10px;
+}
+.TestTypeSelect a {
+  display: block;
+  width: fit-content;
+  margin: 15px auto;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  border: solid 2px darkgreen;
+}
+.TestTypeSelect .sampleTest a {
+  background-color: lightgreen;
+  color: saddlebrown;
+}
+.TestTypeSelect .mainTest a {
+  background-color: chartreuse;
+}
+.TestTypeSelect a:hover {
+  background-color: green;
+  color: snow;
+}
+.TestTypeSelect .sampleTest {
+  background-color: powderblue;
+  color: navy;
+}
+.TestTypeSelect .mainTest {
+  background-color: #008f99;
+  color: azure;
+}
+.TestTypeSelect .wrapper .name label {
+  display: block;
+  text-align: center;
+}
+.TestTypeSelect .wrapper .name input {
+  padding: 5px;
+}
+@media screen and (min-width: 600px) {
+  .TestTypeSelect .wrapper {
+    display: flex;
+    /* height: max-content; */
+    justify-content: space-around;
+    align-items: stretch;
+  }
+  .TestTypeSelect .wrapper section {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+  }
+  .TestTypeSelect .wrapper section p {
+    flex-grow: 1;
+  }
+}
