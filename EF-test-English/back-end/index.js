@@ -62,7 +62,7 @@ mongoose.set("strictQuery", true);
 mongoose
   // .connect("mongodb://0.0.0.0:27017/eftest")
   .connect(
-    "mongodb+srv://fardin:fardin72@cluster0.ihsghhy.mongodb.net/eftest?retryWrites=true&w=majority&appName=Cluster0"
+    "mongodb+srv://fardin:fardin72@cluster0.ieequ.mongodb.net/eftest?retryWrites=true&w=majority&appName=Cluster0"
   )
   .then(() => {
     // app.listen(process.env.PORT || 5000);

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import "./Filter.scss";
-const filters = ["نام", "سن", "جنسیت"];
+const filters = ["name", "age", "gender"];
 export default function Filter({ data, setFilteredData, className }) {
   // State Variables 👇:
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [name, setName] = useState("");
   const [minAge, setMinAge] = useState(0);
   const [maxAge, setMaxAge] = useState(120);
-  const [gender, setGender] = useState("هر دو");
+  const [gender, setGender] = useState("both");
   // Handlers 👇:
   const handleAddFilter = (filter) => {
     if (selectedFilters.includes(filter)) return;
@@ -30,14 +30,14 @@ export default function Filter({ data, setFilteredData, className }) {
     function () {
       if (data.length === 0) return;
       let filteredData;
-      filteredData = !selectedFilters.includes("نام")
+      filteredData = !selectedFilters.includes("name")
         ? data
         : data.filter((item) => {
             const { firstName, lastName } = item._doc.profile;
             const fullName = firstName + lastName;
-            return fullName.includes(name);
+            return fullName.toLowerCase().includes(name.toLowerCase());
           });
-      filteredData = !selectedFilters.includes("سن")
+      filteredData = !selectedFilters.includes("age")
         ? filteredData
         : filteredData.filter(
             (item) =>
@@ -45,7 +45,7 @@ export default function Filter({ data, setFilteredData, className }) {
               +item._doc.profile.age <= maxAge
           );
       filteredData =
-        !selectedFilters.includes("جنسیت") || gender === "هر دو"
+        !selectedFilters.includes("gender") || gender === "both"
           ? filteredData
           : filteredData.filter((item) => item._doc.profile.gender === gender);
       setFilteredData(filteredData);
@@ -57,7 +57,7 @@ export default function Filter({ data, setFilteredData, className }) {
   return (
     <form className={"Filter" + ` ${className}`}>
       <header>
-        <legend> فیلترها:</legend>
+        <legend>filters:</legend>
         <ul>
           {filters.map((filter) => (
             <li key={filter}>
@@ -76,9 +76,9 @@ export default function Filter({ data, setFilteredData, className }) {
       <hr />
       <section>
         {selectedFilters.map((selectedFilter) => {
-          if (selectedFilter === "نام")
+          if (selectedFilter === "name")
             return <NameFilter name={name} setName={setName} key="name" />;
-          if (selectedFilter === "سن")
+          if (selectedFilter === "age")
             return (
               <AgeFilter
                 minAge={minAge}
@@ -102,7 +102,7 @@ function NameFilter({ name, setName }) {
   };
   return (
     <div className="NameFilter">
-      <label htmlFor="nameFilter">نام آزمودنی:</label>
+      <label htmlFor="nameFilter">Participant's name:</label>
       <input
         type="search"
         id="nameFilter"
@@ -122,33 +122,33 @@ function AgeFilter({ minAge, maxAge, setMinAge, setMaxAge }) {
   };
   return (
     <fieldset className="AgeFilter">
-      <legend>محدوده سنی:</legend>
+      <legend>Age range:</legend>
       <div className="range">
-        <span>از</span>
+        <span>from</span>
         <input
           type="number"
           id="min-age"
           value={minAge}
           onChange={handleMinAgeChange}
         />
-        <span>تا</span>
+        <span>to</span>
         <input
           type="number"
           id="max-age"
           value={maxAge}
           onChange={handleMaxAgeChange}
         />
-        <span>سال</span>
+        <span>years</span>
       </div>
     </fieldset>
   );
 }
 function GenderFilter({ gender, setGender }) {
   const handleGenderChange = (event) => setGender(event.target.value);
-  const selectOptions = ["هر دو", "مرد", "زن"];
+  const selectOptions = ["both", "male", "female"];
   return (
     <div className="GenderFilter">
-      <label htmlFor="gender">جنسیت:</label>
+      <label htmlFor="gender">Gender:</label>
       <select name="gender" id="gender" onChange={handleGenderChange}>
         {selectOptions.map((option) => (
           <option value={option} selected={gender === option}>

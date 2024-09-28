@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import "./assets/fonts/Vazirmatn-Regular.ttf";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import NavBar from "./components/NavBar";

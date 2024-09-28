@@ -15,7 +15,7 @@ function NavBar() {
   const toggleShowNav = () => setShowNav((previousShowNav) => !previousShowNav);
   return (
     <div className="NavBar">
-      <button className="menu-button" onClick={toggleShowNav}></button>
+      <Link to="" className="logo" onClick={() => setShowNav(false)}></Link>
       <nav className={showNav ? "" : "hidden"} id="nav">
         <ul>
           {tabs.map(({ title, to }) => (
@@ -27,7 +27,7 @@ function NavBar() {
           ))}
         </ul>
       </nav>
-      <Link to="" className="logo" onClick={() => setShowNav(false)}></Link>
+      <button className="menu-button" onClick={toggleShowNav} />
     </div>
   );
 }

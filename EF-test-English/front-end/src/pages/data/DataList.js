@@ -4,7 +4,6 @@ import "./DataList.scss";
 import DataListItem from "components/DataListItem";
 import Filter from "components/Filter";
 import LoadingSpinner from "components/LoadingSpinner";
-import LoadingNote from "components/LoadingNote";
 
 function DataList({ data, setData, isLoading }) {
   // State variables 👇:
@@ -30,17 +29,17 @@ function DataList({ data, setData, isLoading }) {
   return (
     <div className="DataList">
       <header>
-        {isLoading || !filteredData ? (
-          <h2>لطفاً شکیبا باشید...</h2>
-        ) : (
-          <h2>{`${filteredData.length} نتیجه یافت شد`}</h2>
-        )}
         <div>
-          <span>اعمال فیلتر:</span>
+          <span>Filter:</span>
           <button
             onClick={() => setShowFilters((previous) => !previous)}
           ></button>
         </div>
+        {isLoading || !filteredData ? (
+          <h2>Please Wait...</h2>
+        ) : (
+          <h2>{`${filteredData.length} results found`}</h2>
+        )}
       </header>
       <Filter
         data={data}
@@ -48,7 +47,7 @@ function DataList({ data, setData, isLoading }) {
         className={`${showFilters ? "show" : "hidden"}`}
       />
       {isLoading ? (
-        <LoadingNote />
+        <LoadingSpinner />
       ) : (
         <ul className="list">
           {!filteredData

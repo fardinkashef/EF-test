@@ -62,7 +62,7 @@ function Profile({ profile, setProfile }) {
                 type="radio"
                 id="man"
                 name="gender"
-                value="مرد"
+                value="male"
                 onChange={handleGenderChange}
               />
             </div>
@@ -73,7 +73,7 @@ function Profile({ profile, setProfile }) {
                 type="radio"
                 id="woman"
                 name="gender"
-                value="زن"
+                value="female"
                 onChange={handleGenderChange}
               />
             </div>

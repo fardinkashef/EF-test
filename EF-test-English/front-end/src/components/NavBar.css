@@ -5,7 +5,16 @@
   justify-content: space-between;
   position: relative;
   height: 70px;
-  padding: 5px 25px;
+  padding: 5px 50px;
+}
+.NavBar .logo {
+  flex-grow: 1;
+  background-image: url(assets/icons/logo.svg);
+  width: 60px;
+  height: 60px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
 }
 .NavBar h3 {
   width: 100px;
@@ -59,14 +68,7 @@
   background-color: cyan;
   font-weight: 500;
 }
-.NavBar .logo {
-  background-image: url(assets/icons/logo.svg);
-  width: 60px;
-  height: 60px;
-  background-repeat: no-repeat;
-  background-size: contain;
-  border: none;
-}
+
 @media screen and (min-width: 650px) {
   .NavBar .menu-button {
     display: none;
@@ -75,7 +77,6 @@
     display: block;
     position: static;
     width: fit-content;
-    flex-grow: 1;
   }
   .NavBar #nav ul {
     display: flex;

@@ -21,7 +21,7 @@ function DataRoutes() {
 
     if (!storedAdminData)
       return navigateToLogin(
-        ":دسترسی به داده ها فقط برای ادمین ها امکان پذیر است. لطفاً از طریق فرم زیر وارد شوید"
+        "The data is only accessible to admins. If you are an admin, please log in using the form below:"
       );
 
     const getData = async () => {
@@ -36,9 +36,11 @@ function DataRoutes() {
       } catch (error) {
         console.log("This error happened:", error);
         if (error.response.status === 403)
-          return navigateToLogin(":جواز ورود شما معتبر نیست. لطفاً وارد شوید");
+          return navigateToLogin(
+            "Your access token is not valid, please log in:"
+          );
         return navigateToLogin(
-          ":دسترسی به داده ها فقط برای ادمین ها امکان پذیر است. لطفاً از طریق فرم زیر وارد شوید"
+          "The data is only accessible to admins. If you are an admin, please log in using the form below:"
         );
       } finally {
         setIsLoading(false);

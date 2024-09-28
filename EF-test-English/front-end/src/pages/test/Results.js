@@ -77,24 +77,15 @@ function Results({ answers = initialAnswers, profile, showSaveButton }) {
     wrong: numberOfInAnswers(false),
     missed: numberOfInAnswers(null),
   };
-  const text =
-    "نتایج آزمون" +
-    " " +
-    `${!profile.gender ? "" : profile.gender === "مرد" ? "آقای" : "خانم"}` +
-    " " +
-    profile.firstName +
-    " " +
-    profile.lastName +
-    " " +
-    "به صورت زیر است :" +
-    " ";
-  const text1 = `:نتایج آزمون ${
-    !profile.gender ? "" : profile.gender === "مرد" ? "آقای" : "خانم"
-  } ${profile.firstName} ${profile.lastName} به صورت زیر است`;
+
   // Calculations 👆
+  const fullName = profile.firstName + " " + profile.lastName;
+
   return (
     <div className="results">
-      <legend>{text1}</legend>
+      <legend>{`${
+        profile.gender === "male" ? "Mr" : "Mrs"
+      } ${fullName}'s test results are as follows:`}</legend>
       <section>
         <p>Results aggregate:</p>
         <table>

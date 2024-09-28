@@ -10,7 +10,7 @@ function DataListItem({
 }) {
   // The above setShowModal which we are receiving through props, refers to the big dark background color which covers the whole DataList component. The following setShowModalContent refers to the modal content which will be displayed on top of DataListItem 👇:
   const [showModalContent, setShowModalContent] = useState(false);
-  const type = results.byEachQuestion.length === 60 ? "اصلی " : "نمونه ";
+  const type = results.byEachQuestion.length === 60 ? "main " : "sample ";
 
   // Handlers 👇:
   const handleShowRemoveConfirmationModal = () => {
@@ -30,11 +30,11 @@ function DataListItem({
     <div className="DataListItem">
       <ul>
         <li>{fullName}</li>
-        <li>{`${profile.age} ساله`}</li>
-        <li>{`در آزمون ${type} شرکت کرده اند.`}</li>
-        <li>{`پاسخ های صحیح: ${results.byAnswerStatus.correct}`}</li>
-        <li>{`پاسخ های غلط: ${results.byAnswerStatus.wrong}`}</li>
-        <li>{`پاسخ نداده: ${results.byAnswerStatus.missed}`}</li>
+        <li>{`${profile.age} years old`}</li>
+        <li>{`Has participated in ${type} test`}</li>
+        <li>{`Correct answers: ${results.byAnswerStatus.correct}`}</li>
+        <li>{`Wrong Answers: ${results.byAnswerStatus.wrong}`}</li>
+        <li>{`No Answers: ${results.byAnswerStatus.missed}`}</li>
       </ul>
       <button
         className="remove-btn"
@@ -52,15 +52,15 @@ function DataListItem({
         }}
       >
         <div className="container">
-          <h3>{`آیا از حذف داده مربوط به آزمون ${type} ${
-            profile.gender === "مرد" ? "آقای" : "خانم"
-          } ${fullName} اطمینان دارید؟`}</h3>
+          <h3>{`Are you sure you want to delete ${
+            profile.gender === "male" ? "Mr" : "Mrs"
+          } ${fullName}'s results of ${type} test?`}</h3>
           <div className="control">
             <button className="remove" onClick={handleConfirmRemove}>
-              حذف
+              Remove
             </button>
             <button className="cancel" onClick={handleHideModal}>
-              لغو
+              Cancel
             </button>
           </div>
         </div>

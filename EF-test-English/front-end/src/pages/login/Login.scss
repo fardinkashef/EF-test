@@ -1,15 +1,17 @@
 .Login {
   flex-grow: 1;
   background-color: lightcyan;
-  direction: ltr;
   display: flex;
   flex-direction: column;
+  gap: 1rem;
   justify-content: center;
   align-items: center;
   & * {
     font-size: large;
   }
   .message {
+    max-width: 70%;
+    text-align: center;
     color: black;
   }
   .form {
