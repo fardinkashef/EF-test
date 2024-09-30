@@ -1,6 +1,8 @@
-import "./MainPage.scss";
-import { NavLink } from "react-router-dom";
-function MainPage() {
+import Image from "next/image";
+import hero from "@/assets/icons/mainpage.jpg";
+import Link from "next/link";
+
+export default function Home() {
   return (
     <div className="MainPage">
       <div className="welcome">
@@ -11,10 +13,9 @@ function MainPage() {
           {/* <br /> */}
         </h2>
 
-        <NavLink to="./test"> Start the Test </NavLink>
+        <Link href="/test"> Start the Test </Link>
       </div>
-      <img src={require("assets/icons/mainpage.jpg")} />
+      <Image src={hero} alt="hero" />
     </div>
   );
 }
-export default MainPage;

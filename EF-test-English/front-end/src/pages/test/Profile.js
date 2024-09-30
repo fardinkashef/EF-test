@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import "./Profile.scss";
 import { NavLink } from "react-router-dom";
 function Profile({ profile, setProfile }) {
