@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Waiting from "./Waiting.tsx";
-import LoadingSpinner from "components/LoadingSpinner";
+// import LoadingSpinner from "components/LoadingSpinner";
 import { redirect } from "next/navigation";
 import Image from "next/image.js";
 
@@ -191,7 +191,7 @@ export default function Test({ type, setAnswers }) {
         <div className="w-full bg-orange-100 p-2  sm:my-2 sm:border-solid sm:border-4 sm:border-gray-500 sm:w-[350px]">
           <div className="flex gap-1 mb-1 ">
             <button
-              className="grow bg-yellow-600 text-black text-[50px] leading-8 hover:bg-green-300 hover:text-white disabled:opacity-50 disabled:bg-yellow-700 disabled:text-black disabled:cursor-default"
+              className="grow bg-yellow-600 text-black text-[50px] leading-8 pb-[6px] hover:bg-green-300 hover:text-white disabled:opacity-50 disabled:bg-yellow-700 disabled:text-black disabled:cursor-default"
               onClick={goToPreviousQuestion}
               disabled={index === 0 || selectedOption}
             >
@@ -202,7 +202,7 @@ export default function Test({ type, setAnswers }) {
               What is the feeling?
             </h3>
             <button
-              className="grow bg-yellow-600 text-black text-[50px] leading-8 hover:bg-green-300 hover:text-white disabled:opacity-50 disabled:bg-yellow-700 disabled:text-black disabled:cursor-default"
+              className="grow bg-yellow-600 text-black text-[50px] leading-8 pb-[6px] hover:bg-green-300 hover:text-white disabled:opacity-50 disabled:bg-yellow-700 disabled:text-black disabled:cursor-default"
               onClick={goToNextQuestion}
               disabled={selectedOption}
             >
@@ -217,7 +217,7 @@ export default function Test({ type, setAnswers }) {
                 onClick={() => handleSelectOption(emotion)}
                 className={`w-full h-[60px] text-[25px] font-semibold text-black enabled:hover:cursor-pointer enabled:hover:border-solid enabled:hover:border-purple-600 enabled:hover:border-4 disabled:border-white disabled:opacity-50 ${
                   emotion === selectedOption
-                    ? "border-solid border-4 text-inherit opacity-100"
+                    ? "!border-solid !border-4 !border-purple-600  !text-inherit !opacity-100"
                     : ""
                 }`}
                 disabled={selectedOption}
