@@ -1,3 +1,4 @@
+"use client";
 import Results from "@/components/Results";
 import { useSubjectContext } from "@/lib/contexts/SubjectContext";
 

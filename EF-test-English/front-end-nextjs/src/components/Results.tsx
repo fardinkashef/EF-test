@@ -1,7 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 // import axios from "axios";
-import "./Results.scss";
+// import "./Results.scss";
 const emotions = [
   "anger",
   "disgust",

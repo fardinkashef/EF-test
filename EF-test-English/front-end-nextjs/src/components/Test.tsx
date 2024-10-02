@@ -1,7 +1,8 @@
+"use client";
 import { useState, useEffect, useRef } from "react";
 import Waiting from "./Waiting.tsx";
 // import LoadingSpinner from "components/LoadingSpinner";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Image from "next/image.js";
 
 // Every image is implying one of these emotions:
@@ -35,7 +36,6 @@ for (let i = 0; i < 10; i++) {
 }
 /////////
 export default function Test({ type, setAnswers }) {
-  // *TODO: Try to remove finished state and use navigate like I did in goToNextQuestion function.
   const [index, setIndex] = useState(0); // this index will increment one by one from 0 to 59
   const [selectedOption, setSelectedOption] = useState(null);
   const [isBreakTime, setIsBreakTime] = useState(true);
@@ -51,10 +51,12 @@ export default function Test({ type, setAnswers }) {
     />
   );
 
-  const [finished, setFinished] = useState(false);
   const testRef = useRef();
   const scrollTimeOutRef = useRef();
   const selectOptionTimeOutRef = useRef();
+
+  const router = useRouter();
+
   ////////
   const numberOfQuestions = type === "sample" ? 6 : 60;
   // This array will include 60 items and each item will be true, false or null, corresponding to correct answer, wrong answer or not answered respectively:
@@ -62,7 +64,6 @@ export default function Test({ type, setAnswers }) {
   ////////////
   const imageNumber = shuffledArray1to60[index];
   const correctAnswer = emotions[(imageNumber - 1) % 6];
-  if (index === numberOfQuestions && !finished) setFinished(true);
   /////////////
   function handleRetryLoadingImage() {
     const imageNum = shuffledArray1to60[index + 1];
@@ -90,9 +91,9 @@ export default function Test({ type, setAnswers }) {
   }
   ///////////
   const goToNextQuestion = () => {
+    if (index + 1 === numberOfQuestions) return router.push("/test/results"); //*! I don't know why the argument "results" won't do the job and "/test/results" does. If we use the <Navigate/> component it will be the same (we will need to use <Navigate to="/test/results" />)
     setIndex((previousIndex) => previousIndex + 1);
-    // if (index + 1 === numberOfQuestions) return setFinished(true);
-    if (index + 1 === numberOfQuestions) return redirect("/test/results"); //*! I don't know why the argument "results" won't do the job and "/test/results" does. If we use the <Navigate/> component it will be the same (we will need to use <Navigate to="/test/results" />)
+
     const imageNum = shuffledArray1to60[index + 1];
     const nextImage = (
       <Image
