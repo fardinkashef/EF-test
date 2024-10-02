@@ -59,6 +59,7 @@ const config: Config = {
       backgroundImage: {
         logo: "url('../assets/icons/logo.svg')",
         menu: "url('../assets/icons/menu.svg')",
+        more: "url('../assets/icons/more.svg')",
       },
     },
   },

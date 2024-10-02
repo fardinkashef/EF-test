@@ -1,6 +1,6 @@
-import { NavLink, useSearchParams } from "react-router-dom";
 // import "./DataListItem.scss";
 import { useState } from "react";
+import Link from "next/link";
 function DataListItem({
   profile,
   results,
@@ -27,7 +27,7 @@ function DataListItem({
   };
   const fullName = profile.firstName + " " + profile.lastName;
   return (
-    <div className="DataListItem">
+    <div className="DataListItem w-full h-full bg-inherit p-2 rounded relative">
       <ul>
         <li>{fullName}</li>
         <li>{`${profile.age} years old`}</li>
@@ -37,15 +37,19 @@ function DataListItem({
         <li>{`No Answers: ${results.byAnswerStatus.missed}`}</li>
       </ul>
       <button
-        className="remove-btn"
+        className="remove-btn border-none bg-inherit absolute top-1 right-1 p-1 rounded hover:bg-yellow-400 "
         onClick={handleShowRemoveConfirmationModal}
         title="remove this data"
       >
         ❌
       </button>
-      <NavLink className="more" to={`${id}`} title="more details"></NavLink>
+      <Link
+        className="bg-more w-10 h-10 bg-contain block mx-auto my-2 px-2 py-1 rounded hover:bg-blue-500"
+        href={`/data/${id}`}
+        title="more details"
+      ></Link>
       <div
-        className="modal-content"
+        className="modal-content "
         style={{
           display: `${showModalContent ? "flex" : "none"}`,
           zIndex: `${showModalContent ? 2 : 1}`,
