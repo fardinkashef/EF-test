@@ -1,4 +1,3 @@
-// import "./AboutTest.css";
 export default function AboutTest() {
   return (
     <section className="AboutTest">

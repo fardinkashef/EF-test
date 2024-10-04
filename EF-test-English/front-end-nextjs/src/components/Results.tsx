@@ -1,4 +1,5 @@
 "use client";
+import { createResults } from "@/lib/server-actions/results";
 import { useRef, useState } from "react";
 // import axios from "axios";
 // import "./Results.scss";
@@ -25,25 +26,24 @@ export default function Results({
   const messageRef = useRef();
   // Handlers 👇 :
   const handleSaveResults = async () => {
+    const newData = {
+      profile,
+      results: {
+        byEachQuestion: answers,
+        byEachEmotion: data,
+        byAnswerStatus: {
+          correct: sum.correct,
+          wrong: sum.wrong,
+          missed: sum.missed,
+        },
+      },
+    };
     try {
-      // ! ALWAYS REMEMBER WHEN YOU CHANGE .env FILE, YOU NEED TO RESTART THE APPLICATION (STOP IT USING Ctrl+c AND START IT AGAIN)
-      //   const res = await axios.post(
-      //     process.env.REACT_APP_BACKEND_URL + "/results",
-      //     // "http://localhost:5000/api/results",
-
-      //     {
-      //       profile,
-      //       results: {
-      //         byEachQuestion: answers,
-      //         byEachEmotion: data,
-      //         byAnswerStatus: {
-      //           correct: sum.correct,
-      //           wrong: sum.wrong,
-      //           missed: sum.missed,
-      //         },
-      //       },
-      //     }
-      //   );
+      // const res = await axios.post(
+      //   process.env.REACT_APP_BACKEND_URL + "/results",
+      //   newData
+      // );
+      await createResults(newData);
       setMessage("Results saved successfully");
       setMessageColor("green");
     } catch (error) {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // import "./Filter.scss";
 const filters = ["name", "age", "gender"];
-export default function Filter({ data, setFilteredData, className }) {
+export default function Filter({ data, setFilteredData, showFilters }) {
   // State Variables 👇:
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [name, setName] = useState("");
@@ -55,16 +55,17 @@ export default function Filter({ data, setFilteredData, className }) {
 
   //////
   return (
-    <form className={"Filter" + ` ${className}`}>
-      <header>
+    <form className={` bg-slate-200 ${!showFilters ? "hidden" : ""} `}>
+      <header className="flex justify-center px-0 py-1">
         <legend>filters:</legend>
-        <ul>
+        <ul className="flex justify-around w-[250px] ">
           {filters.map((filter) => (
             <li key={filter}>
               <label htmlFor={filter}>
                 <span>{filter}</span>
                 <input
                   type="checkbox"
+                  className="align-middle mr-1"
                   id={filter}
                   onChange={(e) => handleFiltersCheckBoxChange(e, filter)}
                 />
@@ -74,7 +75,7 @@ export default function Filter({ data, setFilteredData, className }) {
         </ul>
       </header>
       <hr />
-      <section>
+      <section className="flex flex-col items-center">
         {selectedFilters.map((selectedFilter) => {
           if (selectedFilter === "name")
             return <NameFilter name={name} setName={setName} key="name" />;
@@ -101,11 +102,14 @@ function NameFilter({ name, setName }) {
     setName(event.target.value);
   };
   return (
-    <div className="NameFilter">
-      <label htmlFor="nameFilter">Participant's name:</label>
+    <div>
+      <label className="pl-2" htmlFor="nameFilter">
+        Participant's name:
+      </label>
       <input
         type="search"
         id="nameFilter"
+        className="px-1 py-[2px] text-base rounded"
         value={name}
         onChange={handleNameChange}
       />
@@ -121,13 +125,14 @@ function AgeFilter({ minAge, maxAge, setMinAge, setMaxAge }) {
     setMaxAge(event.target.value);
   };
   return (
-    <fieldset className="AgeFilter">
+    <fieldset>
       <legend>Age range:</legend>
-      <div className="range">
+      <div className="flex gap-2">
         <span>from</span>
         <input
           type="number"
           id="min-age"
+          className="w-12 px-1 rounded"
           value={minAge}
           onChange={handleMinAgeChange}
         />
@@ -135,6 +140,7 @@ function AgeFilter({ minAge, maxAge, setMinAge, setMaxAge }) {
         <input
           type="number"
           id="max-age"
+          className="w-12 px-1 rounded"
           value={maxAge}
           onChange={handleMaxAgeChange}
         />
@@ -147,9 +153,14 @@ function GenderFilter({ gender, setGender }) {
   const handleGenderChange = (event) => setGender(event.target.value);
   const selectOptions = ["both", "male", "female"];
   return (
-    <div className="GenderFilter">
+    <div>
       <label htmlFor="gender">Gender:</label>
-      <select name="gender" id="gender" onChange={handleGenderChange}>
+      <select
+        name="gender"
+        className="pl-2"
+        id="gender"
+        onChange={handleGenderChange}
+      >
         {selectOptions.map((option) => (
           <option value={option} selected={gender === option}>
             {option}

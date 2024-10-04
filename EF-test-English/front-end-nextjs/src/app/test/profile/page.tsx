@@ -23,7 +23,6 @@ export default function Profile() {
   };
   // setProfile({ ...profile, gender: event.target.value });
   // Handlers 👆
-  console.log("profile", profile);
 
   return (
     <section className="grow bg-blue-300 text-blue-900 p-5 flex flex-col justify-start items-center gap-5 h-full">

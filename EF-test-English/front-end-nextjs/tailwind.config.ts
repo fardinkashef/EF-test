@@ -60,6 +60,7 @@ const config: Config = {
         logo: "url('../assets/icons/logo.svg')",
         menu: "url('../assets/icons/menu.svg')",
         more: "url('../assets/icons/more.svg')",
+        tune: "url('../assets/icons/tune.svg')",
       },
     },
   },
