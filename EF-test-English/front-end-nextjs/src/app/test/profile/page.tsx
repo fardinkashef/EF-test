@@ -25,7 +25,7 @@ export default function Profile() {
   // Handlers 👆
 
   return (
-    <section className="grow bg-blue-300 text-blue-900 p-5 flex flex-col justify-start items-center gap-5 h-full">
+    <section className="grow text-blue-900 p-5 flex flex-col justify-start items-center gap-5 h-full">
       <legend className="text-center text-xl font-semibold">
         ُSubject Info
       </legend>

@@ -31,14 +31,14 @@ function TestSteps() {
   const stepsTaken = steps.slice(0, currentStepIndex + 1);
   const stepsRemained = initialSteps.slice(currentStepIndex + 1);
   return (
-    <section className="hidden sm:block bg-green-500 py-2 px-0 ">
+    <section className="hidden sm:block bg-cyan-950 py-2 px-0 ">
       <ul className="flex pl-4 pr-10  ">
         {stepsTaken.map((step, index) => (
           <li
             key={step.id}
             className={
               `block grow z-${40 - index * 10} ` +
-              "first:relative first:before:z-50 first:before:content-[''] first:before:block first:before:w-[40px] first:before:h-full first:before:absolute first:before:top-0 first:before:-left-5 first:before:rounded-full  first:before:bg-green-500"
+              "first:relative first:before:z-50 first:before:content-[''] first:before:block first:before:w-[40px] first:before:h-full first:before:absolute first:before:top-0 first:before:-left-5 first:before:rounded-full  first:before:bg-cyan-950"
             }
           >
             <TestStep href={`/test/${step.id}`}>{step.title}</TestStep>
@@ -49,7 +49,7 @@ function TestSteps() {
             key={step.id}
             className={
               `block grow z-${40 - stepsTaken.length * 10 - index * 10} ` +
-              "first:relative first:before:z-50 first:before:content-[''] first:before:block first:before:w-[40px] first:before:h-full first:before:absolute first:before:top-0 first:before:-left-5 first:before:rounded-full  first:before:bg-green-500"
+              "first:relative first:before:z-50 first:before:content-[''] first:before:block first:before:w-[40px] first:before:h-full first:before:absolute first:before:top-0 first:before:-left-5 first:before:rounded-full  first:before:bg-cyan-950"
             }
           >
             <span className="block text-center h-[40px] leading-[45px] relative after:z-40 after:content-[''] after:bg-inherit after:block after:w-[40px] after:h-full after:absolute after:top-0 after:right-[-20px] after:rounded-full after:border-r-solid after:border-r-[5px] after:border-r-white bg-gray-500 text-orange-300 ">

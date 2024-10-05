@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="grow py-7 px-2 bg-slate-200 text-center lg:flex lg:items-center">
+    <div className="grow py-7 px-2 text-center lg:flex lg:items-center">
       <div className="flex flex-col justify-center items-center gap-4 my-[10%] lg:my-0 lg:w-1/2 lg:h-full">
         <h2 className="text-3xl text-cyan-700 mb-5 leading-[3rem]">
           Welcome to

@@ -181,8 +181,8 @@ export default function Test({ type, setAnswers }) {
   }, []);
   ///////
   return (
-    <div className="w-full grow bg-green-100 relative h-screen " ref={testRef}>
-      <div className="rounded mx-auto my-0 mb-1 h-full flex flex-col border-solid border-2 border-orange-400 rounded bg-orange-200 sm:flex-row-reverse sm:p-2 sm:justify-center sm:items-center sm:gap-5  ">
+    <div className="w-full grow relative h-screen" ref={testRef}>
+      <div className="mx-auto my-0 mb-1 h-full flex flex-col border-solid border-2 rounded sm:flex-row-reverse sm:p-2 sm:justify-center sm:items-center sm:gap-5  ">
         <div className="relative w-full h-[10px] grow sm:w-2 sm:max-w-[500px] sm:h-full">
           {image}
           <span className="absolute bottom-0 left-0 bg-gray-500 text-white text-xl py-0 px-2 rounded">{`${
