@@ -4,12 +4,12 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="grow py-7 px-2 bg-green-200 text-center md:flex md:items-center">
-      <div className="mb-[15%] md:w-1/2 md:h-full md:mb-0 md:flex md:flex-col md:items-center md:justify-center md: md: ">
-        <h2 className="text-2xl text-green-700 mb-5">
+    <div className="grow py-7 px-2 bg-slate-200 text-center lg:flex lg:items-center">
+      <div className="flex flex-col justify-center items-center gap-4 my-[10%] lg:my-0 lg:w-1/2 lg:h-full">
+        <h2 className="text-3xl text-cyan-700 mb-5 leading-[3rem]">
           Welcome to
           {/* <br /> */}
-          <span className="text-red-800 block">
+          <span className="block text-cyan-950 font-bold">
             Facial Effect Recognition Test
           </span>
           {/* <br /> */}
@@ -17,7 +17,7 @@ export default function Home() {
 
         <Link
           href="/test"
-          className="bg-yellow-700 text-xl font-bold px-5 py-2 m-4 border-solid border-2 border-yellow-700 rounded cursor-pointer text-gray-300 hover:bg-green-600 hover:border-green-600 "
+          className="bg-green-700 text-xl font-bold px-5 py-3 m-4 rounded-md cursor-pointer text-gray-300 hover:bg-green-600"
         >
           Start the Test
         </Link>
@@ -25,7 +25,7 @@ export default function Home() {
       <Image
         src={hero}
         alt="hero"
-        className="w-full max-w-[700px] rounded md:w-1/2"
+        className="w-full max-w-[700px] mx-auto rounded lg:w-1/2"
       />
     </div>
   );

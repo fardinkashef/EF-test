@@ -19,22 +19,22 @@ export default function NavBar() {
   const toggleShowNav = () => setShowNav((previousShowNav) => !previousShowNav);
 
   return (
-    <div className="bg-green-300 flex justify-between items-center relative h-[70px] px-12 py-1">
+    <div className="bg-cyan-950 flex justify-between items-center relative h-[70px] px-12 py-1">
       <Link
         href="/"
         className="bg-logo w-16 h-16 bg-contain bg-no-repeat border-none"
         onClick={() => setShowNav(false)}
       />
       <nav
-        className={`absolute top-full left-0 w-full z-10 ${
+        className={`absolute top-full left-0 w-full text-white z-10 ${
           showNav ? "" : "hidden"
         } sm:block sm:static sm:w-fit`}
       >
-        <ul className="bg-green-300 text-center sm:flex sm:justify-start sm:items-center  ">
+        <ul className="bg-cyan-950 text-center sm:flex sm:justify-start sm:items-center  ">
           {tabs.map(({ title, href }) => (
             <li
               key={title}
-              className="w-full cursor-pointer text-lg hover:bg-slate-200 sm:hover:bg-inherit sm:w-fit sm:ml-8 "
+              className="w-full cursor-pointer text-lg hover:bg-slate-200 hover:text-black sm:hover:bg-inherit sm:w-fit sm:ml-8 "
             >
               <NavLink href={href} onClick={() => setShowNav(false)}>
                 {title}
@@ -44,7 +44,7 @@ export default function NavBar() {
         </ul>
       </nav>
       <button
-        className="bg-menu w-12 h-12 bg-cover bg-no-repeat  bg-lime-700 border-solid border-2 border-green-950 rounded-sm hover:bg-green-600 sm:hidden"
+        className="bg-menu w-12 h-12 bg-cover bg-no-repeat  bg-slate-300 border-solid border-2 border-cyan-950 rounded-md hover:bg-slate-400 sm:hidden"
         onClick={toggleShowNav}
       />
     </div>
@@ -57,9 +57,9 @@ export function NavLink(props: Omit<ComponentProps<typeof Link>, "className">) {
     <Link
       {...props}
       className={cn(
-        "block py-1 px-0 sm:hover:text-red-600  border-b-4 border-solid border-transparent ",
+        "block py-1 px-0 sm:hover:text-yellow-400  border-b-4 border-solid border-transparent ",
         pathname === props.href &&
-          "bg-cyan-300 sm:bg-inherit  sm:text-blue-700  border-blue-700 sm:hover:border-red-600"
+          "bg-cyan-600 sm:bg-inherit  sm:text-yellow-300  sm:border-yellow-300 sm:hover:border-yellow-400"
       )}
     />
   );
