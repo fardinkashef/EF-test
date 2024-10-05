@@ -7,8 +7,8 @@ type DataByIdProps = {
   };
 };
 
-export default async function DataById(props: DataByIdProps) {
-  const { profile, results } = await getResultsById(props.params.id);
+export default async function DataById({ params }: DataByIdProps) {
+  const { profile, results } = await getResultsById(params.id);
 
   return (
     <Results
