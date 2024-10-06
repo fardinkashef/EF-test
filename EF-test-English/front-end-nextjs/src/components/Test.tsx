@@ -15,10 +15,10 @@ const emotions = [
   "surprise",
 ];
 const colors = [
-  "#ffea6c",
+  "#e72222",
   "#0c0d49",
   "#a0522d",
-  "#e72222",
+  "#ffa500",
   "#332424",
   "#8ab852",
 ];
@@ -189,41 +189,44 @@ export default function Test({ type, setAnswers }) {
             index + 1
           } of ${numberOfQuestions}`}</span>
         </div>
-        <div className="w-full bg-orange-100 p-2  sm:my-2 sm:border-solid sm:border-4 sm:border-gray-500 sm:w-[350px]">
+        <div className="w-full bg-slate-300 p-2  sm:my-2 sm:border-solid sm:border-4 sm:border-gray-500 sm:w-[350px]">
           <div className="flex gap-1 mb-1 ">
             <button
-              className="grow bg-yellow-600 text-black text-[50px] leading-8 pb-[6px] hover:bg-green-300 hover:text-white disabled:opacity-50 disabled:bg-yellow-700 disabled:text-black disabled:cursor-default"
+              className="bg-slate-200 w-12 text-black text-[50px] leading-8 pb-[6px] rounded-md hover:bg-cyan-950 hover:text-cyan-50 disabled:opacity-50 disabled:hover:bg-slate-200 disabled:text-black disabled:cursor-default"
               onClick={goToPreviousQuestion}
               disabled={index === 0 || selectedOption}
             >
               {/* // *This is a html chevron icon 👇:   */}
               &#8249;
             </button>
-            <h3 className="bg-orange-400 p-1 text-center text-xl text-red-800">
-              What is the feeling?
+            <h3 className="grow bg-slate-200 p-1 text-center text-xl text-slate-900 font-semibold rounded-md">
+              Which feeling?
             </h3>
             <button
-              className="grow bg-yellow-600 text-black text-[50px] leading-8 pb-[6px] hover:bg-green-300 hover:text-white disabled:opacity-50 disabled:bg-yellow-700 disabled:text-black disabled:cursor-default"
+              className="bg-slate-200 w-12 text-black text-[50px] leading-8 pb-[6px] rounded-md hover:bg-green-300 hover:text-white disabled:opacity-50 disabled:bg-yellow-700 disabled:text-black disabled:cursor-default"
               onClick={goToNextQuestion}
               disabled={selectedOption}
             >
               &#8250;
             </button>
           </div>
-          <div className="options w-full columns-2">
+          <div className="w-full grid grid-cols-2 gap-2 p-2">
             {emotions.map((emotion, index) => (
               <button
                 key={emotion}
                 id={emotion}
                 onClick={() => handleSelectOption(emotion)}
-                className={`w-full h-[60px] text-[25px] font-semibold text-black enabled:hover:cursor-pointer enabled:hover:border-solid enabled:hover:border-purple-600 enabled:hover:border-4 disabled:border-white disabled:opacity-50 ${
+                className={`w-28 p-1 mx-auto text-xl text-black rounded-lg text-slate-100 border-solid border-2 border-transparent enabled:hover:cursor-pointer enabled:hover:border-solid enabled:hover:border-purple-600 enabled:hover:border-2 disabled:border-white disabled:opacity-50 ${
                   emotion === selectedOption
                     ? "!border-solid !border-4 !border-purple-600  !text-inherit !opacity-100"
                     : ""
                 }`}
                 disabled={selectedOption}
+                // style={{
+                //   background: `linear-gradient(to left, ${colors[index]}, 20%, snow)`,
+                // }}
                 style={{
-                  background: `linear-gradient(to left, ${colors[index]}, 20%, snow)`,
+                  background: `${colors[index]}`,
                 }}
               >
                 {emotion}
