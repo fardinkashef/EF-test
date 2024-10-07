@@ -87,33 +87,41 @@ export default function Results({
   const fullName = profile.firstName + " " + profile.lastName;
 
   return (
-    <div className="bg-slate-200">
+    <div className="bg-slate-200 py-4 text-slate-800">
       <legend className="text-center text-xl mb-5">{`${
         profile.gender === "male" ? "Mr" : "Mrs"
       } ${fullName}'s test results are as follows:`}</legend>
-      <section className="w-full max-w-[250px] bg-slate-200 border-solid border-2 border-orange-400 rounded p-2 mx-auto my-0 mb-2">
-        <p>Results aggregate:</p>
-        <table className="border-collapse border-spacing-0 text-center p-1 border-4 border-solid border-black">
-          <thead>
+      <section className="w-full max-w-[250px] bg-slate-200  rounded p-2 mx-auto my-0 mb-2">
+        <h2 className="mb-2">Overall:</h2>
+        <table className="border-collapse border-spacing-0 text-center p-1 border-2 border-solid border-cyan-950">
+          <thead className="bg-slate-300">
             <tr>
-              <th className="p-1 border-4 border-solid border-black"></th>
-              <th className="p-1 border-4 border-solid border-black">✔</th>
-              <th className="p-1 border-4 border-solid border-black">❌</th>
-              <th className="p-1 border-4 border-solid border-black">➖</th>
+              <th className="p-1 border-2 border-solid border-cyan-950">
+                answer
+              </th>
+              <th className="p-1 border-2 border-solid border-cyan-950 w-8">
+                ✔
+              </th>
+              <th className="p-1 border-2 border-solid border-cyan-950 w-8">
+                ❌
+              </th>
+              <th className="p-1 border-2 border-solid border-cyan-950 w-8">
+                ➖
+              </th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td className="p-1 border-4 border-solid border-black">
+              <td className="p-1 border-2 border-solid border-cyan-950 font-semibold">
                 aggregate
               </td>
-              <td className="p-1 border-4 border-solid border-black">
+              <td className="p-1 border-2 border-solid border-cyan-950">
                 {sum.correct}
               </td>
-              <td className="p-1 border-4 border-solid border-black">
+              <td className="p-1 border-2 border-solid border-cyan-950">
                 {sum.wrong}
               </td>
-              <td className="p-1 border-4 border-solid border-black">
+              <td className="p-1 border-2 border-solid border-cyan-950">
                 {sum.missed}
               </td>
             </tr>
@@ -121,33 +129,39 @@ export default function Results({
         </table>
       </section>
 
-      <section className="w-full max-w-[250px] bg-slate-200 border-solid border-2 border-orange-400 rounded p-2 mx-auto my-0 mb-2">
-        <p>Results seperated by each emotion:</p>
-        <table className="border-collapse border-spacing-0 text-center p-1 border-4 border-solid border-black">
-          <thead>
+      <section className="w-full max-w-[250px] bg-slate-200  rounded p-2 mx-auto my-0 mb-2">
+        <h2 className="mb-2">By each emotion:</h2>
+        <table className="border-collapse border-spacing-0 text-center p-1 border-2 border-solid border-cyan-950">
+          <thead className="bg-slate-300">
             <tr>
-              <th className="p-1 border-4 border-solid border-black">
+              <th className="p-1 border-2 border-solid border-cyan-950">
                 emotion
               </th>
-              <th className="p-1 border-4 border-solid border-black">✔</th>
-              <th className="p-1 border-4 border-solid border-black">❌</th>
-              <th className="p-1 border-4 border-solid border-black">➖</th>
+              <th className="p-1 border-2 border-solid border-cyan-950 w-8">
+                ✔
+              </th>
+              <th className="p-1 border-2 border-solid border-cyan-950 w-8">
+                ❌
+              </th>
+              <th className="p-1 border-2 border-solid border-cyan-950 w-8">
+                ➖
+              </th>
             </tr>
           </thead>
 
           <tbody>
             {data.map(({ emotion, emoji, correct, wrong, missed }) => (
               <tr key={emotion}>
-                <td className="p-1 border-4 border-solid border-black">
+                <td className="p-1 border-2 border-solid border-cyan-950 font-semibold">
                   {emotion} {emoji}
                 </td>
-                <td className="p-1 border-4 border-solid border-black">
+                <td className="p-1 border-2 border-solid border-cyan-950">
                   {correct}
                 </td>
-                <td className="p-1 border-4 border-solid border-black">
+                <td className="p-1 border-2 border-solid border-cyan-950">
                   {wrong}
                 </td>
-                <td className="p-1 border-4 border-solid border-black">
+                <td className="p-1 border-2 border-solid border-cyan-950">
                   {missed}
                 </td>
               </tr>
@@ -155,22 +169,26 @@ export default function Results({
           </tbody>
         </table>
       </section>
-      <section className="w-full max-w-[250px] bg-slate-200 border-solid border-2 border-orange-400 rounded p-2 mx-auto my-0 mb-2">
-        <p>Results by each question:</p>
-        <table className="border-collapse border-spacing-0 text-center p-1 border-4 border-solid border-black">
-          <thead>
+      <section className="w-full max-w-[250px] bg-slate-200  rounded p-2 mx-auto my-0 mb-2">
+        <h2 className="mb-2">By each question:</h2>
+        <table className="border-collapse border-spacing-0 text-center p-1 border-2 border-solid border-cyan-950">
+          <thead className="bg-slate-300">
             <tr>
-              <th className="p-1 border-4 border-solid border-black">Q</th>
-              <th className="p-1 border-4 border-solid border-black">A</th>
+              <th className="p-1 border-2 border-solid border-cyan-950">
+                Question
+              </th>
+              <th className="p-1 border-2 border-solid border-cyan-950">
+                Answer
+              </th>
             </tr>
           </thead>
           <tbody>
             {answers.map((answer, index) => (
               <tr>
-                <td className="p-1 border-4 border-solid border-black">
+                <td className="p-1 border-2 border-solid border-cyan-950">
                   {index + 1}
                 </td>
-                <td className="p-1 border-4 border-solid border-black">{`${
+                <td className="p-1 border-2 border-solid border-cyan-950">{`${
                   answer === true ? "✔" : answer === false ? "❌" : "➖"
                 }`}</td>
               </tr>
