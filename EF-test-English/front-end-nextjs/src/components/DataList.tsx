@@ -30,18 +30,18 @@ export default function DataList({ initialData }) {
 
   return (
     <div className="grow flex flex-col relative">
-      <header className="bg-slate-200 flex flex-wrap justify-around px-0 py-1">
+      <header className="bg-slate-200 flex items-center flex-wrap justify-around px-0 py-1">
         <div className="flex items-center gap-2">
-          <span className="text-xl">Filter:</span>
+          <span className="text-lg">Filter:</span>
           <button
             onClick={() => setShowFilters((previous) => !previous)}
             className="bg-tune w-10 h-10 bg-cover rounded hover:bg-blue-400"
           />
         </div>
         {!filteredData ? (
-          <h2 className="text-center w-[250px]">Please Wait...</h2>
+          <h2 className="text-center w-[250px] text-lg">Please Wait...</h2>
         ) : (
-          <h2 className="text-center w-[250px]">{`${filteredData.length} results found`}</h2>
+          <h2 className="text-center w-[250px] text-lg">{`${filteredData.length} results found`}</h2>
         )}
       </header>
       {data && (
@@ -51,15 +51,14 @@ export default function DataList({ initialData }) {
           showFilters={showFilters}
         />
       )}
-      <ul className="grow bg-green-400 flex justify-evenly gap-2 flex-wrap p-2">
+      <ul className="grow flex justify-evenly gap-2 flex-wrap p-2">
         {filteredData &&
           filteredData.map((item, index) => (
             <li
               key={item.id}
-              className="w-[250px] h-fit rounded"
-              style={{
-                backgroundColor: `${index % 2 === 0 ? "azure" : "cornsilk"}`,
-              }}
+              className={`w-[250px] h-fit rounded ${
+                index % 2 === 0 ? "bg-slate-300" : "bg-zinc-300"
+              }`}
             >
               <DataListItem
                 profile={item.profile}

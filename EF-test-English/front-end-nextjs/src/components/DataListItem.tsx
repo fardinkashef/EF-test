@@ -45,10 +45,10 @@ function DataListItem({
         ❌
       </button>
       <Link
-        className="bg-more w-10 h-10 bg-contain block mx-auto my-2 px-2 py-1 rounded hover:bg-blue-500"
+        className="bg-more w-10 h-10 bg-contain block mx-auto my-2 px-2 py-1 border-solid border-2 border-transparent rounded-full hover:border-slate-500  "
         href={`/data/${id}`}
         title="more details"
-      ></Link>
+      />
       <div
         className="flex justify-center items-center bg-slate-200 absolute top-0 left-0 w-full h-full rounded "
         style={{

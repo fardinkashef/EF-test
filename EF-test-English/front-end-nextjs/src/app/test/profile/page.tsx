@@ -127,7 +127,7 @@ export default function Profile() {
 
       <Link
         href="/test/type-select"
-        className="text-white bg-blue-700 text-center py-1 px-2 rounded-md hover:bg-blue-500 hover:text-blue-800 "
+        className="text-white bg-blue-700 text-center py-1 px-2 rounded-md hover:bg-blue-800"
       >
         Save & Continue
       </Link>

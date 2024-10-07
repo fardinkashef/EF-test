@@ -21,11 +21,13 @@ export default function Results({
   profile,
   showSaveButton,
 }) {
+  const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState("");
   const [messageColor, setMessageColor] = useState("green");
   const messageRef = useRef();
   // Handlers 👇 :
   const handleSaveResults = async () => {
+    setIsSaving(true);
     const newData = {
       profile,
       results: {
@@ -39,10 +41,6 @@ export default function Results({
       },
     };
     try {
-      // const res = await axios.post(
-      //   process.env.REACT_APP_BACKEND_URL + "/results",
-      //   newData
-      // );
       await createResults(newData);
       setMessage("Results saved successfully");
       setMessageColor("green");
@@ -51,6 +49,7 @@ export default function Results({
       setMessageColor("red");
       console.log(error);
     } finally {
+      setIsSaving(false);
       messageRef.current.scrollIntoView({
         behavior: "smooth",
         block: "start",
@@ -91,7 +90,7 @@ export default function Results({
       <legend className="text-center text-xl mb-5">{`${
         profile.gender === "male" ? "Mr" : "Mrs"
       } ${fullName}'s test results are as follows:`}</legend>
-      <section className="w-full max-w-[250px] bg-slate-200  rounded p-2 mx-auto my-0 mb-2">
+      <section className="w-full max-w-[250px] bg-slate-200  rounded p-2 mx-auto my-0 mb-12">
         <h2 className="mb-2">Overall:</h2>
         <table className="border-collapse border-spacing-0 text-center p-1 border-2 border-solid border-cyan-950">
           <thead className="bg-slate-300">
@@ -129,7 +128,7 @@ export default function Results({
         </table>
       </section>
 
-      <section className="w-full max-w-[250px] bg-slate-200  rounded p-2 mx-auto my-0 mb-2">
+      <section className="w-full max-w-[250px] bg-slate-200  rounded p-2 mx-auto my-0 mb-12">
         <h2 className="mb-2">By each emotion:</h2>
         <table className="border-collapse border-spacing-0 text-center p-1 border-2 border-solid border-cyan-950">
           <thead className="bg-slate-300">
@@ -169,7 +168,7 @@ export default function Results({
           </tbody>
         </table>
       </section>
-      <section className="w-full max-w-[250px] bg-slate-200  rounded p-2 mx-auto my-0 mb-2">
+      <section className="w-full max-w-[250px] bg-slate-200  rounded p-2 mx-auto my-0 mb-12">
         <h2 className="mb-2">By each question:</h2>
         <table className="border-collapse border-spacing-0 text-center p-1 border-2 border-solid border-cyan-950">
           <thead className="bg-slate-300">
@@ -202,9 +201,10 @@ export default function Results({
       >
         <button
           onClick={handleSaveResults}
-          className="w-[200px] bg-green-600 text-white rounded p-1 hover:bg-green-400  hover:text-green-600 hover: "
+          className="w-[200px] bg-green-600 text-white rounded p-1 hover:bg-green-700  disabled:opacity-50"
+          disabled={isSaving}
         >
-          save
+          {isSaving ? "saving" : "save"}
         </button>
         <p style={{ color: messageColor }} ref={messageRef}>
           {message}
