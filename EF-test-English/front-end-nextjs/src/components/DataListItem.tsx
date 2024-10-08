@@ -38,7 +38,7 @@ function DataListItem({
         <li>{`No Answers: ${results.byAnswerStatus.missed}`}</li>
       </ul>
       <button
-        className="border-none bg-inherit absolute top-1 right-1 p-1 rounded hover:bg-yellow-400 "
+        className="bg-inherit absolute top-1 right-1 p-1 border-solid border-2 border-transparent rounded-full hover:border-red-600"
         onClick={handleShowRemoveConfirmationModal}
         title="remove this data"
       >
@@ -50,30 +50,26 @@ function DataListItem({
         title="more details"
       />
       <div
-        className="flex justify-center items-center bg-slate-200 absolute top-0 left-0 w-full h-full rounded "
-        style={{
-          display: `${showModalContent ? "flex" : "none"}`,
-          zIndex: `${showModalContent ? 2 : 1}`,
-        }}
+        className={`flex flex-col justify-center items-center px-2 bg-slate-200 absolute top-0 left-0 w-full h-full rounded ${
+          !showModalContent ? "hidden" : "z-10"
+        }`}
       >
-        <div className="">
-          <h3 className="text-center mb-4">{`Are you sure you want to delete ${
-            profile.gender === "male" ? "Mr" : "Mrs"
-          } ${fullName}'s results of ${type} test?`}</h3>
-          <div className="flex justify-center gap-5 ">
-            <button
-              className="w-[90px] px-[10px] py-0 rounded text-lg text-white bg-orange-400 hover:bg-red-600 "
-              onClick={handleConfirmRemove}
-            >
-              Remove
-            </button>
-            <button
-              className="w-[90px] px-[10px] py-0 rounded text-lg text-white bg-blue-300 hover:bg-blue-600 "
-              onClick={handleHideModal}
-            >
-              Cancel
-            </button>
-          </div>
+        <h3 className="mb-4">{`Are you sure you want to delete ${
+          profile.gender === "male" ? "Mr" : "Mrs"
+        } ${fullName}'s results of ${type} test?`}</h3>
+        <div className="flex justify-center gap-5 ">
+          <button
+            className="w-20 p-1 rounded-md text-lg text-white bg-red-600 hover:bg-red-700 "
+            onClick={handleConfirmRemove}
+          >
+            Remove
+          </button>
+          <button
+            className="w-20 p-1 rounded-md text-lg text-white bg-blue-600 hover:bg-blue-700 "
+            onClick={handleHideModal}
+          >
+            Cancel
+          </button>
         </div>
       </div>
     </div>

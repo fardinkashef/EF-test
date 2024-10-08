@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // import "./Filter.scss";
 const filters = ["name", "age", "gender"];
-export default function Filter({ data, setFilteredData, showFilters }) {
+export default function Filter({ data, setFilteredData }) {
   // State Variables 👇:
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [name, setName] = useState("");
@@ -55,7 +55,7 @@ export default function Filter({ data, setFilteredData, showFilters }) {
 
   //////
   return (
-    <form className={` bg-slate-200 ${!showFilters ? "hidden" : ""} `}>
+    <form className="bg-slate-200">
       <header className="flex justify-center px-0 py-1">
         <legend>filters:</legend>
         <ul className="flex justify-around w-[250px] ">

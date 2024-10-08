@@ -35,7 +35,7 @@ export default function DataList({ initialData }) {
           <span className="text-lg">Filter:</span>
           <button
             onClick={() => setShowFilters((previous) => !previous)}
-            className="bg-tune w-10 h-10 bg-cover rounded hover:bg-blue-400"
+            className="bg-tune w-10 h-10 bg-cover rounded hover:bg-zinc-300"
           />
         </div>
         {!filteredData ? (
@@ -44,12 +44,8 @@ export default function DataList({ initialData }) {
           <h2 className="text-center w-[250px] text-lg">{`${filteredData.length} results found`}</h2>
         )}
       </header>
-      {data && (
-        <Filter
-          data={data}
-          setFilteredData={setFilteredData}
-          showFilters={showFilters}
-        />
+      {data && showFilters && (
+        <Filter data={data} setFilteredData={setFilteredData} />
       )}
       <ul className="grow flex justify-evenly gap-2 flex-wrap p-2">
         {filteredData &&

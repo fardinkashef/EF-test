@@ -12,7 +12,7 @@ export default function TestTypeSelect() {
           </p>
           <Link
             href="/test/sample"
-            className="block w-fit my-4 mx-auto px-2 py-1 rounded-md text-lg font-semibold bg-cyan-800 text-white border-2 border-solid border-cyan-950  hover:bg-cyan-900"
+            className="block w-32 text-center my-4 mx-auto px-2 py-1 rounded-md text-lg font-semibold bg-cyan-800 text-white border-2 border-solid border-cyan-950  hover:bg-cyan-900"
           >
             Sample Test
           </Link>
@@ -25,7 +25,7 @@ export default function TestTypeSelect() {
           </p>
           <Link
             href="/test/main"
-            className="block w-fit my-4 mx-auto px-2 py-1 rounded-md text-lg font-semibold border-2 border-solid border-cyan-950 bg-cyan-600 hover:bg-cyan-700"
+            className="block w-32 text-center my-4 mx-auto px-2 py-1 rounded-md text-lg font-semibold border-2 border-solid border-cyan-950 bg-cyan-600 hover:bg-cyan-700"
           >
             Main Test
           </Link>
