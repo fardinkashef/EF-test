@@ -28,14 +28,29 @@ function DataListItem({
   };
   const fullName = profile.firstName + " " + profile.lastName;
   return (
-    <div className="w-full h-full bg-inherit p-2 rounded relative">
+    <div className="w-full h-full bg-inherit p-2 rounded relative text-slate-800">
       <ul>
-        <li>{fullName}</li>
+        <li className="text-cyan-950 text-lg font-semibold mb-2">{fullName}</li>
         <li>{`${profile.age} years old`}</li>
         <li>{`Has participated in ${type} test`}</li>
-        <li>{`Correct answers: ${results.byAnswerStatus.correct}`}</li>
-        <li>{`Wrong Answers: ${results.byAnswerStatus.wrong}`}</li>
-        <li>{`No Answers: ${results.byAnswerStatus.missed}`}</li>
+        <li>
+          Correct answers:
+          <span className="text-green-900 font-semibold">
+            {results.byAnswerStatus.correct}
+          </span>
+        </li>
+        <li>
+          Wrong answers:
+          <span className="text-red-900 font-semibold">
+            {results.byAnswerStatus.wrong}
+          </span>
+        </li>
+        <li>
+          No answers:{" "}
+          <span className="text-gray-800 font-semibold">
+            {results.byAnswerStatus.missed}
+          </span>
+        </li>
       </ul>
       <button
         className="bg-inherit absolute top-1 right-1 p-1 border-solid border-2 border-transparent rounded-full hover:border-red-600"
