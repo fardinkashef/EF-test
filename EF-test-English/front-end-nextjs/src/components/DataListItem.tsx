@@ -46,14 +46,14 @@ function DataListItem({
           </span>
         </li>
         <li>
-          No answers:{" "}
+          No answers:
           <span className="text-gray-800 font-semibold">
             {results.byAnswerStatus.missed}
           </span>
         </li>
       </ul>
       <button
-        className="bg-inherit absolute top-1 right-1 p-1 border-solid border-2 border-transparent rounded-full hover:border-red-600"
+        className="bg-inherit absolute top-1 right-1 p-1 border-solid border-2 border-transparent rounded-full hover:border-red-500"
         onClick={handleShowRemoveConfirmationModal}
         title="remove this data"
       >
