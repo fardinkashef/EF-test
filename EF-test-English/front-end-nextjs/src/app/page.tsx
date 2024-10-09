@@ -17,7 +17,7 @@ export default function Home() {
 
         <Link
           href="/test"
-          className="bg-green-700 text-xl font-bold px-5 py-3 m-4 rounded-md cursor-pointer text-gray-300 hover:bg-green-600"
+          className="bg-green-700 text-xl font-bold px-5 py-3 m-4 rounded-md cursor-pointer text-gray-300 hover:bg-green-800"
         >
           Start the Test
         </Link>

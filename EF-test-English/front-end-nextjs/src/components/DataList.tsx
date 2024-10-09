@@ -8,7 +8,7 @@ import { deleteResults } from "@/lib/server-actions/results";
 export default function DataList({ initialData }) {
   // State variables 👇:
   const [data, setData] = useState(initialData);
-  const [filteredData, setFilteredData] = useState(null);
+  const [filteredData, setFilteredData] = useState(initialData);
   const [showFilters, setShowFilters] = useState(false);
   const [showModal, setShowModal] = useState(false);
 

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 // import "./Filter.scss";
-const filters = ["name", "age", "gender"];
+const filters = ["Name", "Age", "Gender"];
 export default function Filter({ data, setFilteredData }) {
   // State Variables 👇:
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [name, setName] = useState("");
-  const [minAge, setMinAge] = useState(0);
+  const [minAge, setMinAge] = useState(40);
   const [maxAge, setMaxAge] = useState(120);
   const [gender, setGender] = useState("both");
   // Handlers 👇:
@@ -30,24 +30,22 @@ export default function Filter({ data, setFilteredData }) {
     function () {
       if (data.length === 0) return;
       let filteredData;
-      filteredData = !selectedFilters.includes("name")
+      filteredData = !selectedFilters.includes("Name")
         ? data
         : data.filter((item) => {
-            const { firstName, lastName } = item._doc.profile;
+            const { firstName, lastName } = item.profile;
             const fullName = firstName + lastName;
             return fullName.toLowerCase().includes(name.toLowerCase());
           });
-      filteredData = !selectedFilters.includes("age")
+      filteredData = !selectedFilters.includes("Age")
         ? filteredData
         : filteredData.filter(
-            (item) =>
-              minAge <= +item._doc.profile.age &&
-              +item._doc.profile.age <= maxAge
+            (item) => minAge <= +item.profile.age && +item.profile.age <= maxAge
           );
       filteredData =
-        !selectedFilters.includes("gender") || gender === "both"
+        !selectedFilters.includes("Gender") || gender === "both"
           ? filteredData
-          : filteredData.filter((item) => item._doc.profile.gender === gender);
+          : filteredData.filter((item) => item.profile.gender === gender);
       setFilteredData(filteredData);
     },
     [selectedFilters, data, name, minAge, maxAge, gender]
@@ -55,14 +53,14 @@ export default function Filter({ data, setFilteredData }) {
 
   //////
   return (
-    <form className="bg-slate-200">
-      <header className="flex justify-center px-0 py-1">
-        <legend>filters:</legend>
-        <ul className="flex justify-around w-[250px] ">
+    <form className="bg-slate-200 pt-4 pb-8">
+      <header className="flex justify-center px-0 py-1 mb-8">
+        <legend>Filters:</legend>
+        <ul className="flex justify-around w-64 ">
           {filters.map((filter) => (
             <li key={filter}>
-              <label htmlFor={filter}>
-                <span>{filter}</span>
+              <label>
+                <span className="mr-1">{filter}</span>
                 <input
                   type="checkbox"
                   className="align-middle mr-1"
@@ -75,22 +73,22 @@ export default function Filter({ data, setFilteredData }) {
         </ul>
       </header>
       <hr />
-      <section className="flex flex-col items-center">
+      <section className="w-64 flex flex-col items-start gap-6 mx-auto">
         {selectedFilters.map((selectedFilter) => {
-          if (selectedFilter === "name")
-            return <NameFilter name={name} setName={setName} key="name" />;
-          if (selectedFilter === "age")
+          if (selectedFilter === "Name")
+            return <NameFilter name={name} setName={setName} key="Name" />;
+          if (selectedFilter === "Age")
             return (
               <AgeFilter
                 minAge={minAge}
                 maxAge={maxAge}
                 setMinAge={setMinAge}
                 setMaxAge={setMaxAge}
-                key="age"
+                key="Age"
               />
             );
           return (
-            <GenderFilter gender={gender} setGender={setGender} key="gender" />
+            <GenderFilter gender={gender} setGender={setGender} key="Gender" />
           );
         })}
       </section>
@@ -103,13 +101,13 @@ function NameFilter({ name, setName }) {
   };
   return (
     <div>
-      <label className="pl-2" htmlFor="nameFilter">
-        Participant's name:
+      <label className="block" htmlFor="nameFilter">
+        {"Subject's name:"}
       </label>
       <input
         type="search"
         id="nameFilter"
-        className="px-1 py-[2px] text-base rounded"
+        className="px-2 py-[2px] text-base rounded"
         value={name}
         onChange={handleNameChange}
       />
@@ -132,7 +130,7 @@ function AgeFilter({ minAge, maxAge, setMinAge, setMaxAge }) {
         <input
           type="number"
           id="min-age"
-          className="w-12 px-1 rounded"
+          className="w-14 px-1 rounded"
           value={minAge}
           onChange={handleMinAgeChange}
         />
@@ -140,7 +138,7 @@ function AgeFilter({ minAge, maxAge, setMinAge, setMaxAge }) {
         <input
           type="number"
           id="max-age"
-          className="w-12 px-1 rounded"
+          className="w-14 px-1 rounded"
           value={maxAge}
           onChange={handleMaxAgeChange}
         />
