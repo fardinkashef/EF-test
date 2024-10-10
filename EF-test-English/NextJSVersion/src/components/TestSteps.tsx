@@ -4,10 +4,10 @@ import { TestStep } from "./Nav";
 import { usePathname } from "next/navigation";
 
 const initialSteps = [
-  { title: "profile", id: "profile" },
-  { title: "type", id: "type-select" },
-  { title: "test", id: "type" },
-  { title: "results", id: "results" },
+  { title: "Profile", id: "profile" },
+  { title: "Type", id: "type-select" },
+  { title: "Test", id: "type" },
+  { title: "Results", id: "results" },
 ];
 function TestSteps() {
   const [steps, setSteps] = useState(initialSteps);
@@ -52,7 +52,7 @@ function TestSteps() {
               "first:relative first:before:z-50 first:before:content-[''] first:before:block first:before:w-[40px] first:before:h-full first:before:absolute first:before:top-0 first:before:-left-5 first:before:rounded-full  first:before:bg-cyan-950"
             }
           >
-            <span className="block text-center h-[40px] leading-[45px] relative after:z-40 after:content-[''] after:bg-inherit after:block after:w-[40px] after:h-full after:absolute after:top-0 after:right-[-20px] after:rounded-full after:border-r-solid after:border-r-[5px] after:border-r-white bg-gray-500 text-orange-300 ">
+            <span className="block text-center h-[40px] leading-[45px] relative after:z-40 after:content-[''] after:bg-inherit after:block after:w-[40px] after:h-full after:absolute after:top-0 after:right-[-20px] after:rounded-full after:border-r-solid after:border-r-[5px] after:border-r-white bg-slate-500 text-orange-300 ">
               {step.title}
             </span>
           </li>

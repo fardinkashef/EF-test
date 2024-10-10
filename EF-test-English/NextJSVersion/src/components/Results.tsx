@@ -183,7 +183,7 @@ export default function Results({
           </thead>
           <tbody>
             {answers.map((answer, index) => (
-              <tr>
+              <tr key={index}>
                 <td className="p-1 border-2 border-solid border-cyan-950">
                   {index + 1}
                 </td>

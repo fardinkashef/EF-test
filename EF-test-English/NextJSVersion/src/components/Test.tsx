@@ -43,6 +43,7 @@ export default function Test({ type, setAnswers }) {
   ////////
   const [image, setImage] = useState(
     <Image
+      alt="Image of a person with some emotion"
       fill
       className="w-full h-full sm:aspect-[3/4] sm:h-auto sm:max-h-full sm:w-full sm:h-full "
       src={`/images/${type}/${shuffledArray1to60[0]}.jpg`}
@@ -77,6 +78,7 @@ export default function Test({ type, setAnswers }) {
     // * The following approach doesn't work because in a function component, React won't re-render the component if we are setting a state to its previous vaule again.  👇 :
     const reloadingImage = (
       <Image
+        alt="Image of a person with some emotion"
         fill
         className="w-full h-full sm:aspect-[3/4] sm:h-auto sm:max-h-full sm:w-full sm:h-full "
         src={`/images/${type}/${imageNum}.jpg`}
@@ -97,6 +99,7 @@ export default function Test({ type, setAnswers }) {
     const imageNum = shuffledArray1to60[index + 1];
     const nextImage = (
       <Image
+        alt="Image of a person with some emotion"
         fill
         className="w-full h-full sm:aspect-[3/4] sm:h-auto sm:max-h-full sm:w-full sm:h-full "
         src={`/images/${type}/${imageNum}.jpg`}
@@ -115,6 +118,7 @@ export default function Test({ type, setAnswers }) {
     const imageNum = shuffledArray1to60[index - 1];
     const nextImage = (
       <Image
+        alt="Image of a person with some emotion"
         fill
         className="w-full h-full sm:aspect-[3/4] sm:h-auto sm:max-h-full sm:w-full sm:h-full "
         src={`/images/${type}/${imageNum}.jpg`}

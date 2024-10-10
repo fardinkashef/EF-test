@@ -8,11 +8,9 @@ export default function Home() {
       <div className="flex flex-col justify-center items-center gap-4 my-[10%] lg:my-0 lg:w-1/2 lg:h-full">
         <h2 className="text-3xl text-cyan-700 mb-5 leading-[3rem]">
           Welcome to
-          {/* <br /> */}
           <span className="block text-cyan-950 font-bold">
             Facial Effect Recognition Test
           </span>
-          {/* <br /> */}
         </h2>
 
         <Link
