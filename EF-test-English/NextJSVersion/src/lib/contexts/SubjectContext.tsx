@@ -1,15 +1,25 @@
 "use client";
 import { createContext, ReactNode, useContext, useState } from "react";
 
-type SubjectContextProviderProps = {
-  children: ReactNode;
+type profile = {
+  firstName: string;
+  lastName: string;
+  age: string;
+  gender: string;
+  groupCode: string;
+  caseCode: string;
 };
+type answers = (boolean | null)[];
 
 type SubjectContext = {
-  profile: any;
+  profile: profile;
   setProfile: any;
-  answers: any;
+  answers: answers;
   setAnswers: any;
+};
+
+type SubjectContextProviderProps = {
+  children: ReactNode;
 };
 
 const SubjectContext = createContext<SubjectContext | null>(null);
@@ -25,8 +35,8 @@ const initialProfileData = {
 const initialAnswers = Array(60).fill(null);
 
 function SubjectContextProvider({ children }: SubjectContextProviderProps) {
-  const [profile, setProfile] = useState(initialProfileData);
-  const [answers, setAnswers] = useState(initialAnswers);
+  const [profile, setProfile] = useState<profile>(initialProfileData);
+  const [answers, setAnswers] = useState<answers>(initialAnswers);
 
   return (
     <SubjectContext.Provider

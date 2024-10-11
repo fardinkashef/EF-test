@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import Waiting from "./Waiting.tsx";
+import Waiting from "./Waiting";
 // import LoadingSpinner from "components/LoadingSpinner";
 import { useRouter } from "next/navigation";
 import Image from "next/image.js";
@@ -26,10 +26,11 @@ const colors = [
 const breakTime = 500; // The time gap between qustions
 const answerTime = 600000; // The time to answer a question
 
-// This function will shuffle any given array:
-const shuffleArray = (array) => array.sort((a, b) => 0.5 - Math.random());
+// This function will shuffle any given array of numbers:
+const shuffleArray = (array: number[]) =>
+  array.sort((a, b) => 0.5 - Math.random());
 // Shuffled array of [1,2,3, ... , 60] :
-let shuffledArray1to60 = [];
+let shuffledArray1to60: (undefined | number)[] = [];
 for (let i = 0; i < 10; i++) {
   const newArray = Array.from({ length: 6 }, (_, j) => i * 6 + j + 1);
   shuffledArray1to60 = [...shuffledArray1to60, ...shuffleArray(newArray)];
@@ -80,7 +81,7 @@ export default function Test({ type, setAnswers }) {
       <Image
         alt="Image of a person with some emotion"
         fill
-        className="w-full h-full sm:aspect-[3/4] sm:h-auto sm:max-h-full sm:w-full sm:h-full "
+        className="w-full h-full sm:aspect-[3/4] sm:max-h-full sm:w-full sm:h-full "
         src={`/images/${type}/${imageNum}.jpg`}
         onError={() => setDoneWithImageLoading(true)}
         onLoad={() => setDoneWithImageLoading(true)}

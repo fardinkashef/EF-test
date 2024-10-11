@@ -6,17 +6,17 @@ import Link from "next/link";
 export default function Profile() {
   const { profile, setProfile } = useSubjectContext();
   // Handlers 👇:
-  const handleFirstNameChange = (event) =>
+  const handleFirstNameChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setProfile({ ...profile, firstName: event.target.value });
-  const handleLastNameChange = (event) =>
+  const handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setProfile({ ...profile, lastName: event.target.value });
-  const handleAgeChange = (event) =>
+  const handleAgeChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setProfile({ ...profile, age: event.target.value });
-  const handleGroupCodeChange = (event) =>
+  const handleGroupCodeChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setProfile({ ...profile, groupCode: event.target.value });
-  const handleCaseCodeChange = (event) =>
+  const handleCaseCodeChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setProfile({ ...profile, caseCode: event.target.value });
-  const handleGenderChange = (event) => {
+  const handleGenderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       setProfile({ ...profile, gender: event.target.value });
     }
