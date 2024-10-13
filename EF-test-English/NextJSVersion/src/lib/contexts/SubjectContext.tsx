@@ -1,21 +1,12 @@
 "use client";
 import { createContext, ReactNode, useContext, useState } from "react";
-
-type profile = {
-  firstName: string;
-  lastName: string;
-  age: string;
-  gender: string;
-  groupCode: string;
-  caseCode: string;
-};
-type answers = (boolean | null)[];
+import { answers, profile } from "../types";
 
 type SubjectContext = {
   profile: profile;
-  setProfile: any;
+  setProfile: React.Dispatch<React.SetStateAction<profile>>;
   answers: answers;
-  setAnswers: any;
+  setAnswers: React.Dispatch<React.SetStateAction<answers>>;
 };
 
 type SubjectContextProviderProps = {

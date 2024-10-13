@@ -4,6 +4,12 @@ import Waiting from "./Waiting";
 // import LoadingSpinner from "components/LoadingSpinner";
 import { useRouter } from "next/navigation";
 import Image from "next/image.js";
+import { answers } from "@/lib/types";
+
+type TestProps = {
+  type: "main" | "sample";
+  setAnswers: React.Dispatch<React.SetStateAction<answers>>;
+};
 
 // Every image is implying one of these emotions:
 const emotions = [
@@ -28,17 +34,17 @@ const answerTime = 600000; // The time to answer a question
 
 // This function will shuffle any given array of numbers:
 const shuffleArray = (array: number[]) =>
-  array.sort((a, b) => 0.5 - Math.random());
+  array.sort((_, __) => 0.5 - Math.random());
 // Shuffled array of [1,2,3, ... , 60] :
-let shuffledArray1to60: (undefined | number)[] = [];
+let shuffledArray1to60: number[] = [];
 for (let i = 0; i < 10; i++) {
   const newArray = Array.from({ length: 6 }, (_, j) => i * 6 + j + 1);
   shuffledArray1to60 = [...shuffledArray1to60, ...shuffleArray(newArray)];
 }
 /////////
-export default function Test({ type, setAnswers }) {
+export default function Test({ type, setAnswers }: TestProps) {
   const [index, setIndex] = useState(0); // this index will increment one by one from 0 to 59
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [isBreakTime, setIsBreakTime] = useState(true);
   const [doneWithImageLoading, setDoneWithImageLoading] = useState(false); // Either successfully or with failure
   ////////
@@ -46,16 +52,16 @@ export default function Test({ type, setAnswers }) {
     <Image
       alt="Image of a person with some emotion"
       fill
-      className="w-full h-full sm:aspect-[3/4] sm:h-auto sm:max-h-full sm:w-full sm:h-full "
+      className="w-full h-full sm:aspect-[3/4] sm:max-h-full sm:w-full sm:h-full "
       src={`/images/${type}/${shuffledArray1to60[0]}.jpg`}
       onError={handleRetryLoadingImage}
       onLoad={() => setDoneWithImageLoading(true)}
     />
   );
 
-  const testRef = useRef();
-  const scrollTimeOutRef = useRef();
-  const selectOptionTimeOutRef = useRef();
+  const testRef = useRef<HTMLDivElement>(null);
+  const scrollTimeOutRef = useRef<NodeJS.Timeout>();
+  const selectOptionTimeOutRef = useRef<NodeJS.Timeout>();
 
   const router = useRouter();
 
@@ -102,7 +108,7 @@ export default function Test({ type, setAnswers }) {
       <Image
         alt="Image of a person with some emotion"
         fill
-        className="w-full h-full sm:aspect-[3/4] sm:h-auto sm:max-h-full sm:w-full sm:h-full "
+        className="w-full h-full sm:aspect-[3/4] sm:max-h-full sm:w-full sm:h-full"
         src={`/images/${type}/${imageNum}.jpg`}
         onError={handleRetryLoadingImage}
         onLoad={() => setDoneWithImageLoading(true)}
@@ -121,7 +127,7 @@ export default function Test({ type, setAnswers }) {
       <Image
         alt="Image of a person with some emotion"
         fill
-        className="w-full h-full sm:aspect-[3/4] sm:h-auto sm:max-h-full sm:w-full sm:h-full "
+        className="w-full h-full sm:aspect-[3/4] sm:max-h-full sm:w-full sm:h-full "
         src={`/images/${type}/${imageNum}.jpg`}
         onError={handleRetryLoadingImage}
         onLoad={() => setDoneWithImageLoading(true)}
@@ -133,9 +139,9 @@ export default function Test({ type, setAnswers }) {
     setDoneWithImageLoading(false);
   };
   //////////
-  const handleSelectOption = (optionId) => {
-    setSelectedOption(optionId);
-    const newAnswer = optionId === correctAnswer ? true : false;
+  const handleSelectOption = (option: string) => {
+    setSelectedOption(option);
+    const newAnswer = option === correctAnswer ? true : false;
     setAnswers((previousAnswers) =>
       previousAnswers.map((item, index) =>
         index === imageNumber - 1 ? newAnswer : item
@@ -173,11 +179,12 @@ export default function Test({ type, setAnswers }) {
     function () {
       setAnswers(Array(numberOfQuestions).fill(null));
     },
-    [numberOfQuestions]
+    [numberOfQuestions, setAnswers]
   );
   useEffect(function () {
     clearTimeout(scrollTimeOutRef.current);
     scrollTimeOutRef.current = setTimeout(() => {
+      if (!testRef.current) return;
       testRef.current.scrollIntoView({
         behavior: "smooth",
         block: "start",
@@ -199,7 +206,7 @@ export default function Test({ type, setAnswers }) {
             <button
               className="bg-slate-200 w-12 text-black text-[50px] leading-8 pb-[6px] rounded-md hover:bg-cyan-950 hover:text-cyan-50 disabled:opacity-50 disabled:hover:bg-slate-200 disabled:text-black disabled:cursor-default"
               onClick={goToPreviousQuestion}
-              disabled={index === 0 || selectedOption}
+              disabled={index === 0 || !!selectedOption}
             >
               {/* // *This is a html chevron icon 👇:   */}
               &#8249;
@@ -210,7 +217,7 @@ export default function Test({ type, setAnswers }) {
             <button
               className="bg-slate-200 w-12 text-black text-[50px] leading-8 pb-[6px] rounded-md hover:bg-cyan-950 hover:text-cyan-50 disabled:opacity-50  disabled:text-black disabled:cursor-default"
               onClick={goToNextQuestion}
-              disabled={selectedOption}
+              disabled={!!selectedOption}
             >
               &#8250;
             </button>
@@ -226,7 +233,7 @@ export default function Test({ type, setAnswers }) {
                     ? "!border-2 !border-slate-900 !opacity-100"
                     : ""
                 }`}
-                disabled={selectedOption}
+                disabled={!!selectedOption}
                 style={{
                   background: `${colors[index]}`,
                 }}
