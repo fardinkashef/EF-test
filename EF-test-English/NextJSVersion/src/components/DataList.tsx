@@ -14,12 +14,7 @@ export default function DataList({ initialData }) {
 
   // Handlers 👇:
   const handleRemoveData = async (id) => {
-    // const storedAdminData = JSON.parse(localStorage.getItem("adminData"));
     try {
-      // const res = await axios.delete(
-      //   process.env.REACT_APP_BACKEND_URL + `/results/${id}`,
-      //   { headers: { Authorization: `Bearer ${storedAdminData.token}` } }
-      // );
       await deleteResults(id);
       const newData = data.filter((item) => item.id !== id);
       setData(newData);
