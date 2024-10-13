@@ -1,4 +1,12 @@
-export default function Waiting({ setIsBreakTime, setDoneWithImageLoading }) {
+type WaitingProps = {
+  setIsBreakTime: React.Dispatch<React.SetStateAction<boolean>>;
+  setDoneWithImageLoading: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function Waiting({
+  setIsBreakTime,
+  setDoneWithImageLoading,
+}: WaitingProps) {
   const cancelWaiting = () => {
     setIsBreakTime(false);
     setDoneWithImageLoading(true);

@@ -1,8 +1,13 @@
 "use client";
-import { createResults } from "@/lib/server-actions/results";
+import { createSubject } from "@/lib/server-actions/subjects";
+import { answers, profile } from "@/lib/types";
 import { useRef, useState } from "react";
-// import axios from "axios";
-// import "./Results.scss";
+
+type ResultsProps = {
+  answers: answers;
+  profile: profile;
+  showSaveButton: boolean;
+};
 const emotions = [
   "anger",
   "disgust",
@@ -20,11 +25,11 @@ export default function Results({
   answers = initialAnswers,
   profile,
   showSaveButton,
-}) {
+}: ResultsProps) {
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState("");
   const [messageColor, setMessageColor] = useState("green");
-  const messageRef = useRef();
+  const messageRef = useRef<HTMLParagraphElement>(null);
   // Handlers 👇 :
   const handleSaveResults = async () => {
     setIsSaving(true);
@@ -41,7 +46,7 @@ export default function Results({
       },
     };
     try {
-      await createResults(newData);
+      await createSubject(newData);
       setMessage("Results saved successfully");
       setMessageColor("green");
     } catch (error) {
@@ -50,6 +55,7 @@ export default function Results({
       console.log(error);
     } finally {
       setIsSaving(false);
+      if (!messageRef.current) return;
       messageRef.current.scrollIntoView({
         behavior: "smooth",
         block: "start",
@@ -60,7 +66,7 @@ export default function Results({
 
   // Calculations 👇 :
 
-  let data = emotions.map((emotion, index) => ({
+  const data = emotions.map((emotion, index) => ({
     emotion,
     emoji: emojis[index],
     correct: 0,
@@ -72,11 +78,11 @@ export default function Results({
     else if (answers[i] === false) data[i % 6].wrong++;
     else data[i % 6].missed++;
   }
-  const numberOfInAnswers = (value) => {
+  const numberOfInAnswers = (value: boolean | null) => {
     const array = answers.filter((answer) => answer === value);
     return array.length;
   };
-  let sum = {
+  const sum = {
     correct: numberOfInAnswers(true),
     wrong: numberOfInAnswers(false),
     missed: numberOfInAnswers(null),
