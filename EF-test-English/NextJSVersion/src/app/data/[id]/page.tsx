@@ -1,5 +1,5 @@
 import Results from "@/components/Results";
-import { getResultsById } from "@/lib/server-actions/results";
+import { getSubjectById } from "@/lib/server-actions/subjects";
 
 type DataByIdProps = {
   params: {
@@ -8,7 +8,7 @@ type DataByIdProps = {
 };
 
 export default async function DataById({ params }: DataByIdProps) {
-  const { profile, results } = await getResultsById(params.id);
+  const { profile, results } = await getSubjectById(params.id);
 
   return (
     <Results
