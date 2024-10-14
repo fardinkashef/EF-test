@@ -1,25 +1,35 @@
+import { subject } from "@/lib/types";
 import { useEffect, useState } from "react";
 // import "./Filter.scss";
 const filters = ["Name", "Age", "Gender"];
-export default function Filter({ data, setFilteredData }) {
+
+type FilterProps = {
+  subjects: subject[];
+  setFilteredSubjects: React.Dispatch<React.SetStateAction<subject[]>>;
+};
+
+export default function Filter({ subjects, setFilteredSubjects }: FilterProps) {
   // State Variables 👇:
-  const [selectedFilters, setSelectedFilters] = useState([]);
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [name, setName] = useState("");
   const [minAge, setMinAge] = useState(40);
   const [maxAge, setMaxAge] = useState(120);
-  const [gender, setGender] = useState("both");
+  const [gender, setGender] = useState<"male" | "female" | "both">("both");
   // Handlers 👇:
-  const handleAddFilter = (filter) => {
+  const handleAddFilter = (filter: string) => {
     if (selectedFilters.includes(filter)) return;
     setSelectedFilters((previousItems) => [...previousItems, filter]);
   };
-  const handleRemoveFilter = (filter) => {
+  const handleRemoveFilter = (filter: string) => {
     if (!selectedFilters.includes(filter)) return;
     setSelectedFilters((previousItems) =>
       previousItems.filter((item) => item !== filter)
     );
   };
-  const handleFiltersCheckBoxChange = (event, filter) => {
+  const handleFiltersCheckBoxChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    filter: string
+  ) => {
     if (event.target.checked) {
       handleAddFilter(filter);
     } else handleRemoveFilter(filter);
@@ -28,27 +38,35 @@ export default function Filter({ data, setFilteredData }) {
   ////////
   useEffect(
     function () {
-      if (data.length === 0) return;
-      let filteredData;
-      filteredData = !selectedFilters.includes("Name")
-        ? data
-        : data.filter((item) => {
+      if (subjects.length === 0) return;
+      let filteredSubjects;
+      filteredSubjects = !selectedFilters.includes("Name")
+        ? subjects
+        : subjects.filter((item) => {
             const { firstName, lastName } = item.profile;
             const fullName = firstName + lastName;
             return fullName.toLowerCase().includes(name.toLowerCase());
           });
-      filteredData = !selectedFilters.includes("Age")
-        ? filteredData
-        : filteredData.filter(
+      filteredSubjects = !selectedFilters.includes("Age")
+        ? filteredSubjects
+        : filteredSubjects.filter(
             (item) => minAge <= +item.profile.age && +item.profile.age <= maxAge
           );
-      filteredData =
+      filteredSubjects =
         !selectedFilters.includes("Gender") || gender === "both"
-          ? filteredData
-          : filteredData.filter((item) => item.profile.gender === gender);
-      setFilteredData(filteredData);
+          ? filteredSubjects
+          : filteredSubjects.filter((item) => item.profile.gender === gender);
+      setFilteredSubjects(filteredSubjects);
     },
-    [selectedFilters, data, name, minAge, maxAge, gender]
+    [
+      selectedFilters,
+      subjects,
+      name,
+      minAge,
+      maxAge,
+      gender,
+      setFilteredSubjects,
+    ]
   );
 
   //////
@@ -95,8 +113,14 @@ export default function Filter({ data, setFilteredData }) {
     </form>
   );
 }
-function NameFilter({ name, setName }) {
-  const handleNameChange = (event) => {
+
+type NameFilterProps = {
+  name: string;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+};
+
+function NameFilter({ name, setName }: NameFilterProps) {
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
   return (
@@ -115,12 +139,19 @@ function NameFilter({ name, setName }) {
   );
 }
 
-function AgeFilter({ minAge, maxAge, setMinAge, setMaxAge }) {
-  const handleMinAgeChange = (event) => {
-    setMinAge(event.target.value);
+type AgeFilterProps = {
+  minAge: number;
+  maxAge: number;
+  setMinAge: React.Dispatch<React.SetStateAction<number>>;
+  setMaxAge: React.Dispatch<React.SetStateAction<number>>;
+};
+
+function AgeFilter({ minAge, maxAge, setMinAge, setMaxAge }: AgeFilterProps) {
+  const handleMinAgeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMinAge(+event.target.value);
   };
-  const handleMaxAgeChange = (event) => {
-    setMaxAge(event.target.value);
+  const handleMaxAgeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMaxAge(+event.target.value);
   };
   return (
     <fieldset>
@@ -147,8 +178,16 @@ function AgeFilter({ minAge, maxAge, setMinAge, setMaxAge }) {
     </fieldset>
   );
 }
-function GenderFilter({ gender, setGender }) {
-  const handleGenderChange = (event) => setGender(event.target.value);
+
+type gender = "male" | "female" | "both";
+type GenderFilterProps = {
+  gender: gender;
+  setGender: React.Dispatch<React.SetStateAction<gender>>;
+};
+
+function GenderFilter({ gender, setGender }: GenderFilterProps) {
+  const handleGenderChange = (event: React.ChangeEvent<HTMLSelectElement>) =>
+    setGender(event.target.value as gender);
   const selectOptions = ["both", "male", "female"];
   return (
     <div>
@@ -160,7 +199,7 @@ function GenderFilter({ gender, setGender }) {
         onChange={handleGenderChange}
       >
         {selectOptions.map((option) => (
-          <option value={option} selected={gender === option}>
+          <option value={option} selected={gender === option} key={option}>
             {option}
           </option>
         ))}

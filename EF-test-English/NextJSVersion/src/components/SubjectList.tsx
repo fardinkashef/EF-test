@@ -1,25 +1,30 @@
 "use client";
 
 import { useState } from "react";
-import DataListItem from "./DataListItem";
+import SubjectListItem from "./SubjectListItem";
 import Filter from "./Filter";
-import { deleteResults } from "@/lib/server-actions/results";
+import { deleteSubject } from "@/lib/server-actions/subjects";
+import { subject } from "@/lib/types";
 
-export default function DataList({ initialData }) {
+type SubjectListProps = {
+  initialSubjects: subject[];
+};
+
+export default function SubjectList({ initialSubjects }: SubjectListProps) {
   // State variables 👇:
-  const [data, setData] = useState(initialData);
-  const [filteredData, setFilteredData] = useState(initialData);
+  const [subjects, setSubjects] = useState(initialSubjects);
+  const [filteredSubjects, setFilteredSubjects] = useState(initialSubjects);
   const [showFilters, setShowFilters] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   // Handlers 👇:
-  const handleRemoveData = async (id) => {
+  const handleRemoveDSubject = async (id: string) => {
     try {
-      await deleteResults(id);
-      const newData = data.filter((item) => item.id !== id);
-      setData(newData);
+      await deleteSubject(id);
+      const newDSubject = subjects.filter((item) => item.id !== id);
+      setSubjects(newDSubject);
     } catch (error) {
-      console.log("Sth went wrong with deleting data:", error);
+      console.log("Sth went wrong with deleting dSubject:", error);
     }
   };
 
@@ -33,29 +38,29 @@ export default function DataList({ initialData }) {
             className="bg-tune w-10 h-10 bg-cover rounded hover:bg-zinc-300"
           />
         </div>
-        {!filteredData ? (
+        {!filteredSubjects ? (
           <h2 className="text-center w-[250px] text-lg">Please Wait...</h2>
         ) : (
-          <h2 className="text-center w-[250px] text-lg">{`${filteredData.length} results found`}</h2>
+          <h2 className="text-center w-[250px] text-lg">{`${filteredSubjects.length} results found`}</h2>
         )}
       </header>
-      {data && showFilters && (
-        <Filter data={data} setFilteredData={setFilteredData} />
+      {subjects && showFilters && (
+        <Filter subjects={subjects} setFilteredSubjects={setFilteredSubjects} />
       )}
       <ul className="grow flex justify-evenly gap-2 flex-wrap p-2">
-        {filteredData &&
-          filteredData.map((item, index) => (
+        {filteredSubjects &&
+          filteredSubjects.map((subject, index) => (
             <li
-              key={item.id}
+              key={subject.id}
               className={`w-[250px] h-fit rounded ${
                 index % 2 === 0 ? "bg-slate-300" : "bg-zinc-300"
               }`}
             >
-              <DataListItem
-                profile={item.profile}
-                results={item.results}
-                id={item.id}
-                handleRemoveData={() => handleRemoveData(item.id)}
+              <SubjectListItem
+                subject={subject}
+                handleRemoveSubject={() =>
+                  handleRemoveDSubject(subject.id as string)
+                }
                 setShowModal={setShowModal}
               />
             </li>

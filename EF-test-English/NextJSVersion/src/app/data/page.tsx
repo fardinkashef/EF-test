@@ -1,8 +1,8 @@
-import DataList from "@/components/DataList";
-import { getResults } from "@/lib/server-actions/results";
+import SubjectList from "@/components/SubjectList";
+import { getSubjects } from "@/lib/server-actions/subjects";
 
 export default async function Data() {
-  const data = await getResults();
+  const subjects = await getSubjects();
 
-  return <DataList initialData={data} />;
+  return <SubjectList initialSubjects={subjects} />;
 }
