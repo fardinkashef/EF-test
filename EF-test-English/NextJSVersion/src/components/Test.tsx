@@ -34,6 +34,7 @@ const answerTime = 600000; // The time to answer a question
 
 // This function will shuffle any given array of numbers:
 const shuffleArray = (array: number[]) =>
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   array.sort((_, __) => 0.5 - Math.random());
 // Shuffled array of [1,2,3, ... , 60] :
 let shuffledArray1to60: number[] = [];
