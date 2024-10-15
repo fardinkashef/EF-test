@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Dispatch, SetStateAction } from "react";
 import Waiting from "./Waiting";
 // import LoadingSpinner from "components/LoadingSpinner";
 import { useRouter } from "next/navigation";
@@ -8,7 +8,7 @@ import { answers } from "@/lib/types";
 
 type TestProps = {
   type: "main" | "sample";
-  setAnswers: React.Dispatch<React.SetStateAction<answers>>;
+  setAnswers: Dispatch<SetStateAction<answers>>;
 };
 
 // Every image is implying one of these emotions:
