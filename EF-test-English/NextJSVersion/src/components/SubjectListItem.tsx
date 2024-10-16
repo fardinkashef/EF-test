@@ -2,6 +2,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { subject } from "@/lib/types";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 type DataListItemProps = {
   subject: subject;
@@ -14,13 +16,18 @@ function DataListItem({
   setShowModal,
   handleRemoveSubject,
 }: DataListItemProps) {
-  // The above setShowModal which we are receiving through props, refers to the big dark background color which covers the whole DataList component. The following setShowModalContent refers to the modal content which will be displayed on top of DataListItem 👇:
+  //* This is for using NextAuth in a client component 👇:
+  const { data: session } = useSession();
+  //* The above setShowModal which we are receiving through props, refers to the big dark background color which covers the whole DataList component. The following setShowModalContent refers to the modal content which will be displayed on top of DataListItem 👇:
   const [showModalContent, setShowModalContent] = useState(false);
+  const router = useRouter();
   const type =
     subject.results.byEachQuestion.length === 60 ? "main " : "sample ";
 
   // Handlers 👇:
   const handleShowRemoveConfirmationModal = () => {
+    console.log("session", session);
+    if (!session) return router.push("/api/auth/signin?callbackUrl=/data");
     setShowModal(true);
     setShowModalContent(true);
   };

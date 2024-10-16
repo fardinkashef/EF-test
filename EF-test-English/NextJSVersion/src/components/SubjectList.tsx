@@ -21,10 +21,11 @@ export default function SubjectList({ initialSubjects }: SubjectListProps) {
   const handleRemoveDSubject = async (id: string) => {
     try {
       await deleteSubject(id);
-      const newDSubject = subjects.filter((item) => item.id !== id);
-      setSubjects(newDSubject);
+      const newSubjects = subjects.filter((item) => item.id !== id);
+      setSubjects(newSubjects);
+      setFilteredSubjects(newSubjects);
     } catch (error) {
-      console.log("Sth went wrong with deleting dSubject:", error);
+      console.log("Sth went wrong with deleting the subject:", error);
     }
   };
 
