@@ -18,7 +18,7 @@ export default function SubjectList({ initialSubjects }: SubjectListProps) {
   const [showModal, setShowModal] = useState(false);
 
   // Handlers 👇:
-  const handleRemoveDSubject = async (id: string) => {
+  const handleRemoveSubject = async (id: string) => {
     try {
       await deleteSubject(id);
       const newSubjects = subjects.filter((item) => item.id !== id);
@@ -60,7 +60,7 @@ export default function SubjectList({ initialSubjects }: SubjectListProps) {
               <SubjectListItem
                 subject={subject}
                 handleRemoveSubject={() =>
-                  handleRemoveDSubject(subject.id as string)
+                  handleRemoveSubject(subject.id as string)
                 }
                 setShowModal={setShowModal}
               />

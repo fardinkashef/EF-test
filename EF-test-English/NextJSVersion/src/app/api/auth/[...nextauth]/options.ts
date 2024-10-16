@@ -1,3 +1,4 @@
+import { getAdmin } from "@/lib/server-actions/admins";
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -18,23 +19,12 @@ export const options: NextAuthOptions = {
         },
       },
       async authorize(credentials) {
-        // This is where you need to retrieve user data
-        // to verify with credentials
-        // Docs: https://next-auth.js.org/configuration/providers/credentials
-        const user = {
-          id: "42",
-          email: "fardinkashef1397@gmail.com",
-          password: "fardin72",
-        };
-
-        if (
-          credentials?.email === user.email &&
-          credentials?.password === user.password
-        ) {
-          return user;
-        } else {
-          return null;
+        if (!credentials) return null;
+        const admin = await getAdmin(credentials.email, credentials.password);
+        if (admin) {
+          return admin;
         }
+        return null;
       },
     }),
   ],

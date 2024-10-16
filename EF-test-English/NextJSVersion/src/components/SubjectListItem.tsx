@@ -26,8 +26,6 @@ function DataListItem({
 
   // Handlers 👇:
   const handleShowRemoveConfirmationModal = () => {
-    console.log("session", session);
-    if (!session) return router.push("/api/auth/signin?callbackUrl=/data");
     setShowModal(true);
     setShowModalContent(true);
   };
@@ -36,6 +34,7 @@ function DataListItem({
     setShowModalContent(false);
   };
   const handleConfirmRemove = () => {
+    if (!session) return router.push("/api/auth/signin?callbackUrl=/data");
     handleRemoveSubject();
     handleHideModal();
   };
