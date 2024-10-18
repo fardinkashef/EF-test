@@ -77,7 +77,7 @@ export default function Filter({ subjects, setFilteredSubjects }: FilterProps) {
                 onClick={() => toggleFilter(filter)}
                 className={`w-20 h-12 rounded-md ${
                   selectedFilters.includes(filter)
-                    ? "bg-cyan-950 text-cyan-50"
+                    ? "bg-cyan-800 text-cyan-50"
                     : "bg-slate-300 text-slate-800"
                 }`}
               >
@@ -88,7 +88,7 @@ export default function Filter({ subjects, setFilteredSubjects }: FilterProps) {
         </ul>
       </header>
       <hr />
-      <section className="w-64 flex flex-col items-start gap-6 mx-auto text-slate-800">
+      <section className="w-64 flex flex-col items-center gap-8 mx-auto text-slate-800">
         {selectedFilters.map((selectedFilter) => {
           if (selectedFilter === "Name")
             return <NameFilter name={name} setName={setName} key="Name" />;
@@ -122,8 +122,11 @@ function NameFilter({ name, setName }: NameFilterProps) {
   };
   return (
     <div>
-      <label className="block" htmlFor="nameFilter">
-        {"Subject's name:"}
+      <label
+        className="block text-lg text-center text-slate-700 font-semibold mb-1"
+        htmlFor="nameFilter"
+      >
+        {"Subject's name"}
       </label>
       <input
         type="search"
@@ -152,7 +155,9 @@ function AgeFilter({ minAge, maxAge, setMinAge, setMaxAge }: AgeFilterProps) {
   };
   return (
     <fieldset>
-      <legend>Age range:</legend>
+      <legend className="text-lg text-center text-slate-700 font-semibold mb-1">
+        Age range
+      </legend>
       <div className="flex gap-2">
         <span>from</span>
         <input
@@ -170,7 +175,7 @@ function AgeFilter({ minAge, maxAge, setMinAge, setMaxAge }: AgeFilterProps) {
           value={maxAge}
           onChange={handleMaxAgeChange}
         />
-        <span>years</span>
+        <span>years old</span>
       </div>
     </fieldset>
   );
@@ -188,7 +193,12 @@ function GenderFilter({ gender, setGender }: GenderFilterProps) {
   const selectOptions = ["both", "male", "female"];
   return (
     <div>
-      <label htmlFor="gender">Gender:</label>
+      <label
+        className="block text-center text-lg text-slate-700 font-semibold mb-1"
+        htmlFor="gender"
+      >
+        Gender
+      </label>
       <select
         name="gender"
         className="pl-2"
