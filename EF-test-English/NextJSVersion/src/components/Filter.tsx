@@ -26,13 +26,9 @@ export default function Filter({ subjects, setFilteredSubjects }: FilterProps) {
       previousItems.filter((item) => item !== filter)
     );
   };
-  const handleFiltersCheckBoxChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    filter: string
-  ) => {
-    if (event.target.checked) {
-      handleAddFilter(filter);
-    } else handleRemoveFilter(filter);
+  const toggleFilter = (filter: string) => {
+    if (!selectedFilters.includes(filter)) return handleAddFilter(filter);
+    handleRemoveFilter(filter);
   };
   // Handlers 👆
   ////////
@@ -73,25 +69,26 @@ export default function Filter({ subjects, setFilteredSubjects }: FilterProps) {
   return (
     <form className="bg-slate-200 pt-4 pb-8">
       <header className="flex justify-center px-0 py-1 mb-8">
-        <legend>Filters:</legend>
         <ul className="flex justify-around w-64 ">
           {filters.map((filter) => (
             <li key={filter}>
-              <label>
-                <span className="mr-1">{filter}</span>
-                <input
-                  type="checkbox"
-                  className="align-middle mr-1"
-                  id={filter}
-                  onChange={(e) => handleFiltersCheckBoxChange(e, filter)}
-                />
-              </label>
+              <button
+                type="button"
+                onClick={() => toggleFilter(filter)}
+                className={`w-20 h-12 rounded-md ${
+                  selectedFilters.includes(filter)
+                    ? "bg-cyan-950 text-cyan-50"
+                    : "bg-slate-300 text-slate-800"
+                }`}
+              >
+                {filter}
+              </button>
             </li>
           ))}
         </ul>
       </header>
       <hr />
-      <section className="w-64 flex flex-col items-start gap-6 mx-auto">
+      <section className="w-64 flex flex-col items-start gap-6 mx-auto text-slate-800">
         {selectedFilters.map((selectedFilter) => {
           if (selectedFilter === "Name")
             return <NameFilter name={name} setName={setName} key="Name" />;
