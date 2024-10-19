@@ -43,6 +43,7 @@ export async function getSubjectById(id: string) {
 
 export async function createSubject(newData: subject) {
   try {
+    connectToDatabase();
     const createdResults = new Subject(newData);
     await createdResults.save();
   } catch (error) {
