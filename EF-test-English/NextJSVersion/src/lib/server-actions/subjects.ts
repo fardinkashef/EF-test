@@ -6,7 +6,7 @@ import { subject } from "../types";
 
 export async function getSubjects() {
   try {
-    connectToDatabase();
+    await connectToDatabase();
     const data = await Subject.find();
     if (!data) {
       throw new Error("There's not any results to return.");
@@ -28,7 +28,7 @@ export async function getSubjects() {
 
 export async function getSubjectById(id: string) {
   try {
-    connectToDatabase();
+    await connectToDatabase();
     const data = await Subject.findById(id);
     if (!data) {
       throw new Error("There's not any results to return.");
@@ -43,7 +43,7 @@ export async function getSubjectById(id: string) {
 
 export async function createSubject(newData: subject) {
   try {
-    connectToDatabase();
+    await connectToDatabase();
     const createdResults = new Subject(newData);
     await createdResults.save();
   } catch (error) {
@@ -55,6 +55,7 @@ export async function createSubject(newData: subject) {
 export async function deleteSubject(id: string) {
   let results;
   try {
+    await connectToDatabase();
     results = await Subject.findById(id);
   } catch (error) {
     console.log("This error happened while deleting the data:", error);
