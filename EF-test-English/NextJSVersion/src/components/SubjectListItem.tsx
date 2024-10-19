@@ -20,6 +20,8 @@ function DataListItem({
   const { data: session } = useSession();
   //* The above setShowModal which we are receiving through props, refers to the big dark background color which covers the whole DataList component. The following setShowModalContent refers to the modal content which will be displayed on top of DataListItem 👇:
   const [showModalContent, setShowModalContent] = useState(false);
+  const [isRemoving, setIsRemoving] = useState(false);
+
   const router = useRouter();
   const type =
     subject.results.byEachQuestion.length === 60 ? "main " : "sample ";
@@ -33,10 +35,17 @@ function DataListItem({
     setShowModal(false);
     setShowModalContent(false);
   };
-  const handleConfirmRemove = () => {
+  const handleConfirmRemove = async () => {
     if (!session) return router.push("/api/auth/signin?callbackUrl=/data");
-    handleRemoveSubject();
-    handleHideModal();
+    setIsRemoving(true);
+    try {
+      await handleRemoveSubject();
+      handleHideModal();
+    } catch (error) {
+      console.log("This error happen while removing the data:", error);
+    } finally {
+      setIsRemoving(false);
+    }
   };
   const fullName = subject.profile.firstName + " " + subject.profile.lastName;
   return (
@@ -86,10 +95,11 @@ function DataListItem({
         } ${fullName}'s results of ${type} test?`}</h3>
         <div className="flex justify-center gap-5 ">
           <button
-            className="w-20 p-1 rounded-md text-lg text-white bg-red-600 hover:bg-red-700 "
+            className="w-20 p-1 rounded-md text-lg text-white bg-red-600 hover:bg-red-700 disabled:opacity-50"
             onClick={handleConfirmRemove}
+            disabled={isRemoving}
           >
-            Remove
+            {`${isRemoving ? "Wait" : "Remove"}`}
           </button>
           <button
             className="w-20 p-1 rounded-md text-lg text-white bg-blue-600 hover:bg-blue-700 "
