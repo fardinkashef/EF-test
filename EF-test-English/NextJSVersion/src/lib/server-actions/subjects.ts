@@ -3,6 +3,7 @@
 import { connectToDatabase } from "@/lib/database/db-connection";
 import Subject from "../database/models/subject";
 import { subject } from "../types";
+import { revalidatePath } from "next/cache";
 
 export async function getSubjects() {
   try {
@@ -69,6 +70,7 @@ export async function deleteSubject(id: string) {
 
   try {
     await results.deleteOne();
+    revalidatePath("/data", "page");
   } catch (error) {
     console.log("This error happened while deleting the data:", error);
     throw error;
