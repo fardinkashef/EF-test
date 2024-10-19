@@ -8,8 +8,7 @@ import { ComponentProps, useState } from "react";
 const tabs = [
   { title: "Home", href: "/" },
   { title: "Test", href: "/test" },
-  { title: "About-Test", href: "/about-test" },
-  { title: "About-Us", href: "/about-us" },
+  { title: "About", href: "/about" },
   { title: "Data", href: "/data" },
 ];
 

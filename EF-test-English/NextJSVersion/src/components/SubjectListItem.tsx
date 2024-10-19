@@ -65,7 +65,7 @@ function DataListItem({
         </li>
       </ul>
       <button
-        className="bg-inherit absolute top-1 right-1 p-1 border-solid border-2 border-transparent rounded-full hover:border-red-500"
+        className="bg-inherit absolute top-1 right-1 p-1 border-solid border-2 border-transparent rounded-full hover:border-red-700"
         onClick={handleShowRemoveConfirmationModal}
         title="remove this data"
       >

@@ -1,12 +1,13 @@
 import Image from "next/image.js";
+import ekmanImage from "../../../public/images/about/Paul-Ekman.jpg";
 
 export default function About() {
   return (
     <div className="">
-      <div className="sm:flex">
-        <div className="sm:w-1/2">
+      <section className="pt-12 px-4 sm:flex justify-center items-center lg:gap-20 xl:gap-28">
+        <div className="max-w-96 px-4 mx-auto sm:mx-0">
           <h2>About Test</h2>
-          <p>
+          <p className="">
             The Ekman-Friesen Facial Affect Recognition Test, also known as the
             Pictures of Facial Affect (POFA), is a psychological tool developed
             by Paul Ekman and Wallace V. Friesen in 1976. It consists of 110
@@ -19,13 +20,14 @@ export default function About() {
             and clinical assessments of emotional recognition abilities.
           </p>
         </div>
-        <Image
-          alt="Image of a person with some emotion"
-          fill
-          className="hidden sm:block sm:w-1/2"
-          src={`/images/about/Paul-Ekman.jpg`}
-        />
-      </div>
+        <div className="hidden w-full max-w-72 sm:block">
+          <Image
+            alt="Image of a person with some emotion"
+            className="w-full aspect-square "
+            src={ekmanImage}
+          />
+        </div>
+      </section>
     </div>
   );
 }
