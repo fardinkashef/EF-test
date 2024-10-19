@@ -5,7 +5,7 @@ import Admin from "../database/models/admin";
 
 export async function getAdmin(email: string, password: string) {
   try {
-    connectToDatabase();
+    await connectToDatabase();
     const admin = await Admin.findOne({ email });
     if (!admin) {
       return null;
