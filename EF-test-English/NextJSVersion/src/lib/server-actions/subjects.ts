@@ -42,8 +42,8 @@ export async function getSubjectById(id: string) {
 }
 
 export async function createSubject(newData: subject) {
-  const createdResults = new Subject(newData);
   try {
+    const createdResults = new Subject(newData);
     await createdResults.save();
   } catch (error) {
     console.log("This error happened while creating new data:", error);
