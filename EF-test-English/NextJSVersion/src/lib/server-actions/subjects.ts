@@ -47,6 +47,7 @@ export async function createSubject(newData: subject) {
     await connectToDatabase();
     const createdResults = new Subject(newData);
     await createdResults.save();
+    // revalidatePath("/data");
   } catch (error) {
     console.log("This error happened while creating new data:", error);
     throw error;
@@ -70,7 +71,7 @@ export async function deleteSubject(id: string) {
 
   try {
     await results.deleteOne();
-    revalidatePath("/data", "page");
+    revalidatePath("/data");
   } catch (error) {
     console.log("This error happened while deleting the data:", error);
     throw error;
