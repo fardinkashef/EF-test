@@ -19,7 +19,7 @@ const initialProfileData = {
   firstName: "",
   lastName: "",
   age: "",
-  gender: "",
+  gender: undefined,
   groupCode: "",
   caseCode: "",
 };

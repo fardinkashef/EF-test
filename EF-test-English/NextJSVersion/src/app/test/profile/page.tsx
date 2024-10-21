@@ -1,27 +1,46 @@
 "use client";
 
 import { useSubjectContext } from "@/lib/contexts/SubjectContext";
-import Link from "next/link";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { z } from "zod";
+import { useRouter } from "next/navigation";
+
+const schema = z.object({
+  firstName: z
+    .string()
+    .min(2, { message: "First name must be 2 or more characters long" }),
+  lastName: z
+    .string()
+    .min(2, { message: "Last name must be 2 or more characters long" }),
+  age: z
+    .string()
+    .length(2, { message: "Age must be exactly 2 characters long" }),
+  gender: z.enum(["male", "female"], {
+    message: "Please select one of the options",
+  }),
+  groupCode: z.string(),
+  caseCode: z.string(),
+});
+
+type FormFields = z.infer<typeof schema>;
 
 export default function Profile() {
   const { profile, setProfile } = useSubjectContext();
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<FormFields>({
+    defaultValues: profile,
+    resolver: zodResolver(schema),
+  });
   // Handlers 👇:
-  const handleFirstNameChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setProfile({ ...profile, firstName: event.target.value });
-  const handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setProfile({ ...profile, lastName: event.target.value });
-  const handleAgeChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setProfile({ ...profile, age: event.target.value });
-  const handleGroupCodeChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setProfile({ ...profile, groupCode: event.target.value });
-  const handleCaseCodeChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setProfile({ ...profile, caseCode: event.target.value });
-  const handleGenderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      setProfile({ ...profile, gender: event.target.value });
-    }
+  const submit: SubmitHandler<FormFields> = async (data) => {
+    setProfile(data);
+    router.push("/test/type-select");
   };
-  // setProfile({ ...profile, gender: event.target.value });
   // Handlers 👆
 
   return (
@@ -29,108 +48,121 @@ export default function Profile() {
       <legend className="text-center text-xl font-semibold">
         ُSubject Info
       </legend>
-      <form className="flex justify-evenly gap-5 flex-wrap ">
-        <div className="w-full max-w-[250px] ">
-          <label htmlFor="firstName" className="block py-0 px-2">
-            Name
-          </label>
-          <input
-            className="w-full py-1 px-2 rounded"
-            type="text"
-            id="firstName"
-            value={profile.firstName}
-            onChange={handleFirstNameChange}
-          />
-        </div>
-        <div className="w-full max-w-[250px] ">
-          <label htmlFor="lastName" className="block py-0 px-2">
-            Last Name
-          </label>
-          <input
-            className="w-full py-1 px-2 rounded"
-            type="text"
-            id="lastName"
-            value={profile.lastName}
-            onChange={handleLastNameChange}
-          />
-        </div>
-        <div className="w-full max-w-[250px] ">
-          <label htmlFor="age" className="block py-0 px-2">
-            Age
-          </label>
-          <input
-            className="w-full py-1 px-2 rounded"
-            type="text"
-            id="age"
-            value={profile.age}
-            onChange={handleAgeChange}
-          />
-        </div>
-        <div className="w-full max-w-[250px]  ">
-          <fieldset className="border-none">
-            <legend>Gender</legend>
+      <form onSubmit={handleSubmit(submit)}>
+        <div className="flex justify-evenly gap-5 flex-wrap ">
+          <div className="w-full max-w-[250px] ">
+            <label htmlFor="firstName" className="block py-0 px-2">
+              First Name
+            </label>
+            <input
+              className="w-full py-1 px-2 rounded"
+              type="text"
+              {...register("firstName")}
+              id="firstName"
+            />
+            {errors.firstName && (
+              <div className="text-red-500">{errors.firstName.message}</div>
+            )}
+          </div>
+          <div className="w-full max-w-[250px] ">
+            <label htmlFor="lastName" className="block py-0 px-2">
+              Last Name
+            </label>
+            <input
+              className="w-full py-1 px-2 rounded"
+              type="text"
+              {...register("lastName")}
+              id="lastName"
+            />
+            {errors.lastName && (
+              <div className="text-red-500">{errors.lastName.message}</div>
+            )}
+          </div>
+          <div className="w-full max-w-[250px] ">
+            <label htmlFor="age" className="block py-0 px-2">
+              Age
+            </label>
+            <input
+              className="w-full py-1 px-2 rounded"
+              type="text"
+              {...register("age")}
+              id="age"
+            />
+            {errors.age && (
+              <div className="text-red-500">{errors.age.message}</div>
+            )}
+          </div>
+          <div className="w-full max-w-[250px]  ">
+            <fieldset className="border-none">
+              <legend>Gender</legend>
 
-            <div className="inline my-0 mx-5">
-              <label htmlFor="man" className="inline py-0 px-2">
-                male
-              </label>
-              <input
-                className="py-1 px-2 rounded"
-                type="radio"
-                id="man"
-                name="gender"
-                value="male"
-                onChange={handleGenderChange}
-              />
-            </div>
+              <div className="inline my-0 mx-5">
+                <label htmlFor="man" className="inline py-0 px-2">
+                  male
+                </label>
+                <input
+                  className="py-1 px-2 rounded"
+                  type="radio"
+                  {...register("gender")}
+                  id="man"
+                  value="male"
+                />
+              </div>
 
-            <div className="inline my-0 mx-5">
-              <label htmlFor="woman" className="inline py-0 px-2">
-                female
-              </label>
-              <input
-                className="py-1 px-2 rounded"
-                type="radio"
-                id="woman"
-                name="gender"
-                value="female"
-                onChange={handleGenderChange}
-              />
-            </div>
-          </fieldset>
+              <div className="inline my-0 mx-5">
+                <label htmlFor="woman" className="inline py-0 px-2">
+                  female
+                </label>
+                <input
+                  className="py-1 px-2 rounded"
+                  type="radio"
+                  {...register("gender")}
+                  id="woman"
+                  value="female"
+                />
+              </div>
+            </fieldset>
+            {errors.gender && (
+              <div className="text-red-500">{errors.gender.message}</div>
+            )}
+          </div>
+          <div className="w-full max-w-[250px] ">
+            <label htmlFor="groupCode" className="block py-0 px-2">
+              Group Code
+            </label>
+            <input
+              className="w-full py-1 px-2 rounded"
+              type="text"
+              {...register("groupCode")}
+              id="groupCode"
+            />
+            {errors.groupCode && (
+              <div className="text-red-500">{errors.groupCode.message}</div>
+            )}
+          </div>
+          <div className="w-full max-w-[250px] ">
+            <label htmlFor="caseCode" className="block py-0 px-2">
+              Subject Code
+            </label>
+            <input
+              className="w-full py-1 px-2 rounded"
+              type="text"
+              {...register("caseCode")}
+              id="caseCode"
+            />
+            {errors.caseCode && (
+              <div className="text-red-500">{errors.caseCode.message}</div>
+            )}
+          </div>
         </div>
-        <div className="w-full max-w-[250px] ">
-          <label htmlFor="groupCode" className="block py-0 px-2">
-            Group Code
-          </label>
-          <input
-            className="w-full py-1 px-2 rounded"
-            type="text"
-            id="groupCode"
-            value={profile.groupCode}
-            onChange={handleGroupCodeChange}
-          />
-        </div>
-        <div className="w-full max-w-[250px] ">
-          <label htmlFor="caseCode" className="block py-0 px-2">
-            Subject Code
-          </label>
-          <input
-            className="w-full py-1 px-2 rounded"
-            type="text"
-            id="caseCode"
-            value={profile.caseCode}
-            onChange={handleCaseCodeChange}
-          />
-        </div>
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="block w-36 text-white bg-blue-700 text-center mx-auto mt-8 p-2 rounded-md hover:bg-blue-800"
+        >
+          {isSubmitting ? "Saving..." : "Save & Continue"}
+        </button>
       </form>
-
-      <Link
-        href="/test/type-select"
-        className="text-white bg-blue-700 text-center py-1 px-2 rounded-md hover:bg-blue-800"
-      >
-        Save & Continue
-      </Link>
     </section>
   );
 }

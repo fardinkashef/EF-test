@@ -2,7 +2,7 @@ export type profile = {
   firstName: string;
   lastName: string;
   age: string;
-  gender: string;
+  gender: "male" | "female" | undefined;
   groupCode: string;
   caseCode: string;
 };
