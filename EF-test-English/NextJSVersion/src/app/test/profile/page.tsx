@@ -37,7 +37,7 @@ export default function Profile() {
     resolver: zodResolver(schema),
   });
   // Handlers 👇:
-  const submit: SubmitHandler<FormFields> = async (data) => {
+  const submit: SubmitHandler<FormFields> = (data) => {
     setProfile(data);
     router.push("/test/type-select");
   };
