@@ -18,7 +18,7 @@ export default function NavBar() {
   const toggleShowNav = () => setShowNav((previousShowNav) => !previousShowNav);
 
   return (
-    <div className="bg-cyan-950 flex justify-between items-center relative h-[70px] px-12 py-1">
+    <div className="bg-cyan-950 flex justify-between items-center relative h-[70px] px-4 sm:px-12 py-1">
       <Link
         href="/"
         className="bg-logo w-16 h-16 bg-contain bg-no-repeat border-none"
