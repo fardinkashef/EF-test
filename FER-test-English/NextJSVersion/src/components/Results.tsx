@@ -1,6 +1,7 @@
 "use client";
 import { createSubject } from "@/lib/server-actions/subjects";
 import { answers, profile } from "@/lib/types";
+// import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
 type ResultsProps = {
@@ -30,6 +31,8 @@ export default function Results({
   const [message, setMessage] = useState("");
   const [messageColor, setMessageColor] = useState("green");
   const messageRef = useRef<HTMLParagraphElement>(null);
+
+  // const router = useRouter();
   // Handlers 👇 :
   const handleSaveResults = async () => {
     setIsSaving(true);
@@ -49,6 +52,8 @@ export default function Results({
       await createSubject(newData);
       setMessage("Results saved successfully");
       setMessageColor("green");
+      // router.push("/data");
+      // router.refresh();
     } catch (error) {
       setMessage("Something went wrong and couldn't save the results");
       setMessageColor("red");
