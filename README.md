@@ -14,7 +14,7 @@ First go to your projects folder and clone the repository by running this comman
 git clone https://github.com/fardinkashef/EF-test.git
 ```
 
-The app was previously developed for usage in Persian, also using React for front-end and Node.js for back-end, so there are a couple of folders I need you to ignore. First a folder named "EF-test-Persian" in the root directory of the repo and two folders named "front-end" and "back-end" in "FER-test-English" folder, just ignore them all! Recently, I re-developed this web app using Next.js, and there's a folder named "NextJSVersion". So, first change your directory to this folder:
+The app was previously developed for usage in Persian, also using React for front-end and Node.js for back-end, so there are a couple of folders I need you to ignore. First a folder named "FER-test-Persian" in the root directory of the repo and two folders named "front-end" and "back-end" in "FER-test-English" folder, just ignore them all! Recently, I re-developed this web app using Next.js, and there's a folder named "NextJSVersion". So, first change your directory to this folder:
 
 ```
 cd EF-test/FER-test-English/NextJSVersion
