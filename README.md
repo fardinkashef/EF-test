@@ -6,6 +6,10 @@ The Facial Effect Recognition Test web application presents participants with a 
 
 A psychology student asked me to develop this web application for her master’s thesis. The goal was to simplify the administration of the Facial Effect Recognition Test for psychology students. By digitizing the test, I aimed to eliminate the need for manual recording of the results and their analysis, making the process more efficient and user-friendly.
 
+## 👀 Demo
+
+Navigate to [FER-Test](https://fer-test.vercel.app/). Have fun!
+
 ## 🚀 Quick Start For Developers
 
 First go to your projects folder and clone the repository by running this command in your terminal:
