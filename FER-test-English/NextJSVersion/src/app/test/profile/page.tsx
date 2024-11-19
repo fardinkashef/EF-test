@@ -49,9 +49,9 @@ export default function Profile() {
         ُSubject Info
       </legend>
       <form onSubmit={handleSubmit(submit)}>
-        <div className="flex justify-evenly gap-5 flex-wrap ">
+        <div className="flex justify-center gap-12 flex-wrap">
           <div className="w-full max-w-[250px] ">
-            <label htmlFor="firstName" className="block py-0 px-2">
+            <label htmlFor="firstName" className="block py-0">
               First Name
             </label>
             <input
@@ -65,7 +65,7 @@ export default function Profile() {
             )}
           </div>
           <div className="w-full max-w-[250px] ">
-            <label htmlFor="lastName" className="block py-0 px-2">
+            <label htmlFor="lastName" className="block py-0">
               Last Name
             </label>
             <input
@@ -79,7 +79,7 @@ export default function Profile() {
             )}
           </div>
           <div className="w-full max-w-[250px] ">
-            <label htmlFor="age" className="block py-0 px-2">
+            <label htmlFor="age" className="block py-0">
               Age
             </label>
             <input
@@ -96,8 +96,8 @@ export default function Profile() {
             <fieldset className="border-none">
               <legend>Gender</legend>
 
-              <div className="inline my-0 mx-5">
-                <label htmlFor="man" className="inline py-0 px-2">
+              <div className="inline my-0">
+                <label htmlFor="man" className="inline py-0 mr-1">
                   male
                 </label>
                 <input
@@ -110,7 +110,7 @@ export default function Profile() {
               </div>
 
               <div className="inline my-0 mx-5">
-                <label htmlFor="woman" className="inline py-0 px-2">
+                <label htmlFor="woman" className="inline py-0 mr-1">
                   female
                 </label>
                 <input
@@ -127,7 +127,7 @@ export default function Profile() {
             )}
           </div>
           <div className="w-full max-w-[250px] ">
-            <label htmlFor="groupCode" className="block py-0 px-2">
+            <label htmlFor="groupCode" className="block py-0">
               Group Code
             </label>
             <input
@@ -141,7 +141,7 @@ export default function Profile() {
             )}
           </div>
           <div className="w-full max-w-[250px] ">
-            <label htmlFor="caseCode" className="block py-0 px-2">
+            <label htmlFor="caseCode" className="block py-0">
               Subject Code
             </label>
             <input
