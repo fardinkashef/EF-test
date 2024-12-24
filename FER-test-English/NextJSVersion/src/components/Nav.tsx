@@ -18,18 +18,18 @@ export default function NavBar() {
   const toggleShowNav = () => setShowNav((previousShowNav) => !previousShowNav);
 
   return (
-    <div className="bg-cyan-950 flex justify-between items-center relative h-[70px] px-4 sm:px-12 py-1">
+    <div className="flex justify-between items-center relative h-[70px] px-4 sm:px-12 py-1">
       <Link
         href="/"
         className="bg-logo w-16 h-16 bg-contain bg-no-repeat border-none"
         onClick={() => setShowNav(false)}
       />
       <nav
-        className={`absolute top-full left-0 w-full text-white z-10 ${
+        className={`absolute top-full left-0 w-ful z-10 ${
           showNav ? "" : "hidden"
         } sm:block sm:static sm:w-fit`}
       >
-        <ul className="bg-cyan-950 text-center sm:flex sm:justify-start sm:items-center  ">
+        <ul className=" text-center sm:flex sm:justify-start sm:items-center  ">
           {tabs.map(({ title, href }) => (
             <li
               key={title}
@@ -56,9 +56,9 @@ export function NavLink(props: Omit<ComponentProps<typeof Link>, "className">) {
     <Link
       {...props}
       className={cn(
-        "block py-1 px-0 sm:hover:text-yellow-400  border-b-4 border-solid border-transparent ",
+        "block py-1 px-0 sm:hover:text-blue-600  border-b-4 border-solid border-transparent ",
         pathname === props.href &&
-          "bg-cyan-600 sm:bg-inherit  sm:text-yellow-300  sm:border-yellow-300 sm:hover:border-yellow-400"
+          "bg-cyan-600 sm:bg-inherit  sm:text-blue-600  sm:border-blue-600 sm:hover:border-blue-600"
       )}
     />
   );

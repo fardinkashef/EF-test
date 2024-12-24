@@ -14,9 +14,17 @@ export const connectToDatabase = async () => {
   }
 
   try {
-    await mongoose.connect(process.env.MONGODB_URL, {
-      dbName: "eftest",
-    });
+    await mongoose.connect(
+      process.env.MONGODB_URL,
+      {
+        dbName: "fer-test-english-nextjs-version",
+      }
+
+      // ,
+      //    {
+      //   dbName: "eftest",
+      // }
+    );
 
     isConnected = true;
 
