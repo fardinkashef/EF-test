@@ -60,10 +60,10 @@ app.use((err, req, res, next) => {
 // );
 mongoose.set("strictQuery", true);
 mongoose
-  // .connect("mongodb://0.0.0.0:27017/eftest")
-  .connect(
-    "mongodb+srv://fardin:fardin72@cluster0.ihsghhy.mongodb.net/eftest?retryWrites=true&w=majority&appName=Cluster0"
-  )
+  .connect("mongodb://0.0.0.0:27017/fer-test-persian-react-version")
+  // .connect(
+  //   "mongodb+srv://fardin:fardin72@cluster0.ihsghhy.mongodb.net/eftest?retryWrites=true&w=majority&appName=Cluster0"
+  // )
   .then(() => {
     // app.listen(process.env.PORT || 5000);
     // app.listen(5000);
