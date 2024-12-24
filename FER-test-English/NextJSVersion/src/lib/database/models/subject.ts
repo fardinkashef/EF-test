@@ -1,7 +1,7 @@
 import { Document } from "mongoose";
 import { Schema, models, model, Model } from "mongoose";
 
-//* This integration of typescript works but it may not be the best practice. I will leave it for now until I get a better idea on how to use typescript with mongoose.
+//* This integration of typescript works but it may not be the best practice. I leave it for now until I get a better idea on how to use typescript with mongoose.
 export interface ISubject extends Document {
   profile: {
     firstName: string;

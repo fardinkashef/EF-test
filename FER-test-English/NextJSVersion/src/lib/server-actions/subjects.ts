@@ -1,15 +1,15 @@
 "use server";
 
 import { connectToDatabase } from "@/lib/database/db-connection";
-import Subject, { ISubject } from "../database/models/Subject";
+import Subject from "../database/models/Subject";
 import { subject } from "../types";
 import { revalidatePath } from "next/cache";
-import { Schema } from "mongoose";
+import { Types } from "mongoose";
 
 export async function getSubjects() {
   try {
     await connectToDatabase();
-    const data: ISubject[] = await Subject.find({}).limit(3).lean();
+    const data = await Subject.find({}).limit(3).lean();
     if (!data) {
       throw new Error("There's not any results to return.");
     }
@@ -22,8 +22,8 @@ export async function getSubjects() {
     console.log("data", data[0]);
     const subjectsList = data.map((subject) => ({
       ...subject,
-      id: (subject._id as Schema.Types.ObjectId).toString(),
-      _id: (subject._id as Schema.Types.ObjectId).toString(),
+      id: (subject._id as Types.ObjectId).toString(),
+      _id: (subject._id as Types.ObjectId).toString(),
     })) as subject[];
     return subjectsList;
   } catch (error) {
