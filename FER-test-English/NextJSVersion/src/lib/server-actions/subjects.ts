@@ -18,8 +18,6 @@ export async function getSubjects() {
     //* Note: Even by using lean() method, the _id prop won't be a plain object and like the warning says: "Only plain objects can be passed to Client Components from Server Components. Objects with toJSON methods are not supported. Convert it manually to a simple value before passing it to props". So I used toString() method below to convert the value of _id prop to a simple value.
     //* Another way to handle this problem like what we used to do in a MERN app: There in Express app we do "res.json(data)" to send data, so we convert the data into json and then in client side in React app we do JSON.parse (axios does this automatically), so I did the same thing here. I saw this solution in StackOverFlow but I think there must be a better way to handle this problem here in Next.js.
     // const dataPOJO = JSON.parse(JSON.stringify(data));
-
-    console.log("data", data[0]);
     const subjectsList = data.map((subject) => ({
       ...subject,
       id: (subject._id as Types.ObjectId).toString(),
