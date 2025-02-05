@@ -9,7 +9,7 @@ import { Types } from "mongoose";
 export async function getSubjects() {
   try {
     await connectToDatabase();
-    const data = await Subject.find({}).limit(3).lean();
+    const data = await Subject.find().lean();
     if (!data) {
       throw new Error("There's not any results to return.");
     }
