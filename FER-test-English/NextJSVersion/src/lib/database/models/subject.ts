@@ -49,6 +49,7 @@ const SubjectSchema = new Schema<ISubject>({
         correct: Number,
         wrong: Number,
         missed: Number,
+        _id: false,
       },
     ],
 

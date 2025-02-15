@@ -22,10 +22,9 @@ export const connectToDatabase = async () => {
       }
 
       // Use the following db name to access the project's mongodb on atlas 👇:
-      // ,
-      //    {
-      //     ",
-      // }
+      // {
+      //   dbName: "eftest",
+      // } 
     );
 
     isConnected = true;

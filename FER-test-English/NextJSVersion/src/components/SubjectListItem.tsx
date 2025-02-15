@@ -4,22 +4,17 @@ import Link from "next/link";
 import { subject } from "@/lib/types";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { deleteSubject } from "@/lib/server-actions/subjects";
 
-type DataListItemProps = {
+type SubjectListItemProps = {
   subject: subject;
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-  handleRemoveSubject: () => Promise<void>;
 };
 
-function DataListItem({
-  subject,
-  setShowModal,
-  handleRemoveSubject,
-}: DataListItemProps) {
+export default function SubjectListItem({ subject }: SubjectListItemProps) {
   //* This is for using NextAuth in a client component 👇:
   const { data: session } = useSession();
-  //* The above setShowModal which we are receiving through props, refers to the big dark background color which covers the whole DataList component. The following setShowModalContent refers to the modal content which will be displayed on top of DataListItem 👇:
-  const [showModalContent, setShowModalContent] = useState(false);
+
+  const [showModal, setShowModal] = useState(false);
   const [isRemoving, setIsRemoving] = useState(false);
 
   const router = useRouter();
@@ -27,19 +22,17 @@ function DataListItem({
     subject.results.byEachQuestion.length === 60 ? "main " : "sample ";
 
   // Handlers 👇:
-  const handleShowRemoveConfirmationModal = () => {
+  const handleShowModal = () => {
     setShowModal(true);
-    setShowModalContent(true);
   };
   const handleHideModal = () => {
     setShowModal(false);
-    setShowModalContent(false);
   };
   const handleConfirmRemove = async () => {
     if (!session) return router.push("/api/auth/signin?callbackUrl=/data");
     setIsRemoving(true);
     try {
-      await handleRemoveSubject();
+      await handleRemoveSubject(subject.id as string);
       handleHideModal();
     } catch (error) {
       console.log("This error happen while removing the data:", error);
@@ -47,6 +40,17 @@ function DataListItem({
       setIsRemoving(false);
     }
   };
+  ////////////////////
+  // Handlers 👇:
+  const handleRemoveSubject = async (id: string) => {
+    try {
+      await deleteSubject(id);
+    } catch (error) {
+      console.log("Sth went wrong with deleting the subject:", error);
+    }
+  };
+
+  /////////////////////////
   const fullName = subject.profile.firstName + " " + subject.profile.lastName;
   return (
     <div className="w-full h-full bg-inherit p-2 rounded relative text-slate-800">
@@ -75,7 +79,7 @@ function DataListItem({
       </ul>
       <button
         className="bg-inherit absolute top-1 right-1 p-1 border-solid border-2 border-transparent rounded-full hover:border-red-700"
-        onClick={handleShowRemoveConfirmationModal}
+        onClick={handleShowModal}
         title="remove this data"
       >
         ❌
@@ -87,7 +91,7 @@ function DataListItem({
       />
       <div
         className={`flex flex-col justify-center items-center px-2 bg-slate-200 absolute top-0 left-0 w-full h-full rounded ${
-          !showModalContent ? "hidden" : "z-10"
+          !showModal ? "hidden" : "z-10"
         }`}
       >
         <h3 className="mb-4">{`Are you sure you want to delete ${
@@ -112,5 +116,3 @@ function DataListItem({
     </div>
   );
 }
-
-export default DataListItem;
