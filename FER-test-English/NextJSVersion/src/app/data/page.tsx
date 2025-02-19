@@ -1,4 +1,4 @@
-import FilterNew from "@/components/FilterNew";
+import Filter from "@/components/Filter";
 import Pagination from "@/components/Pagination";
 import SubjectList from "@/components/SubjectList";
 import { getPagesNumber } from "@/lib/server-actions/subjects";
@@ -24,7 +24,7 @@ export default async function Data(props: {
 
   return (
     <div className="w-full">
-      <FilterNew />
+      <Filter />
       <SubjectList
         gender={gender}
         minAge={minAge}
