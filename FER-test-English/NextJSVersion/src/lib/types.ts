@@ -1,6 +1,7 @@
 export type profile = {
   firstName: string;
   lastName: string;
+  fullName: string;
   age: string;
   gender: "male" | "female" | undefined;
   groupCode: string;

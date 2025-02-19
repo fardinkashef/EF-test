@@ -38,7 +38,10 @@ export default function Profile() {
   });
   // Handlers 👇:
   const submit: SubmitHandler<FormFields> = (data) => {
-    setProfile(data);
+    setProfile({
+      ...data,
+      fullName: [data.firstName, data.lastName].join(" "),
+    });
     router.push("/test/type-select");
   };
   // Handlers 👆

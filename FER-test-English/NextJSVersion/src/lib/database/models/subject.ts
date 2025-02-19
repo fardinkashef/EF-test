@@ -6,6 +6,7 @@ export interface ISubject extends Document {
   profile: {
     firstName: string;
     lastName: string;
+    fullName: string;
     age: string;
     gender: string;
     groupCode: string;
@@ -35,6 +36,7 @@ const SubjectSchema = new Schema<ISubject>({
   profile: {
     firstName: String,
     lastName: String,
+    fullName: String,
     age: String,
     gender: String,
     groupCode: String,

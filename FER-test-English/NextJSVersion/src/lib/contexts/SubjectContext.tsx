@@ -18,6 +18,7 @@ const SubjectContext = createContext<SubjectContext | null>(null);
 const initialProfileData = {
   firstName: "",
   lastName: "",
+  fullName: "",
   age: "",
   gender: undefined,
   groupCode: "",

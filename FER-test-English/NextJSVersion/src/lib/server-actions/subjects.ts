@@ -6,9 +6,12 @@ import { subject } from "../types";
 import { revalidatePath } from "next/cache";
 import { Types } from "mongoose";
 
+const ITEMS_PER_PAGE = 10;
+
 type queryObject = {
   "profile.gender"?: string;
   "profile.age"?: object;
+  "profile.fullName"?: RegExp;
 };
 
 export async function getSubjects(
@@ -20,17 +23,19 @@ export async function getSubjects(
 ) {
   const queryObject = {} as queryObject;
   if (gender !== "both") queryObject["profile.gender"] = gender;
-  if (minAge !== 40) queryObject["profile.age"] = { $gt: minAge };
-  if (maxAge !== 120) queryObject["profile.age"] = { $lt: maxAge };
+  if (minAge !== 40) queryObject["profile.age"] = { $gte: minAge };
+  if (maxAge !== 120) queryObject["profile.age"] = { $lte: maxAge };
   if (minAge !== 40 && maxAge !== 120)
-    queryObject["profile.age"] = { $gt: minAge, $lt: maxAge };
+    queryObject["profile.age"] = { $gte: minAge, $lte: maxAge };
+  if (name) queryObject["profile.fullName"] = new RegExp(name, "i");
 
   try {
     await connectToDatabase();
-    console.log("this is very 2 new query object:", queryObject);
-
-    const data = await Subject.find(queryObject).sort({ _id: -1 }).lean();
-    console.log("this is the filtered data", data);
+    const data = await Subject.find(queryObject)
+      .skip((page - 1) * ITEMS_PER_PAGE)
+      .limit(ITEMS_PER_PAGE)
+      .sort({ _id: -1 })
+      .lean();
 
     if (!data) {
       throw new Error("There's not any results to return.");
@@ -46,6 +51,34 @@ export async function getSubjects(
     })) as subject[];
 
     return subjectsList;
+  } catch (error) {
+    console.log("This error happened when getting all the results:", error);
+    throw error;
+  }
+}
+export async function getPagesNumber(
+  gender: string,
+  minAge: number,
+  maxAge: number,
+  name: string
+) {
+  const queryObject = {} as queryObject;
+  if (gender !== "both") queryObject["profile.gender"] = gender;
+  if (minAge !== 40) queryObject["profile.age"] = { $gte: minAge };
+  if (maxAge !== 120) queryObject["profile.age"] = { $lte: maxAge };
+  if (minAge !== 40 && maxAge !== 120)
+    queryObject["profile.age"] = { $gte: minAge, $lte: maxAge };
+  if (name) queryObject["profile.fullName"] = new RegExp(name, "i");
+
+  try {
+    await connectToDatabase();
+    const documentsNumber = await Subject.countDocuments(queryObject);
+
+    // If there isn't any matching documents, return 1 as the number of pages.
+    if (!documentsNumber) return 1;
+    // Else, calculate the number of pages.
+    const totalPages = Math.ceil(documentsNumber / ITEMS_PER_PAGE);
+    return totalPages;
   } catch (error) {
     console.log("This error happened when getting all the results:", error);
     throw error;
