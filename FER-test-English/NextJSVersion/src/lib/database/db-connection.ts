@@ -17,14 +17,14 @@ export const connectToDatabase = async () => {
     await mongoose.connect(
       process.env.MONGODB_URL,
       // Use the following db name to access local mongodb 👇:
-      {
-        dbName: "fer-test-english-nextjs-version",
-      }
+      // {
+      //   dbName: "fer-test-english-nextjs-version",
+      // }
 
       // Use the following db name to access the project's mongodb on atlas 👇:
-      // {
-      //   dbName: "eftest",
-      // } 
+      {
+        dbName: "eftest",
+      }
     );
 
     isConnected = true;
