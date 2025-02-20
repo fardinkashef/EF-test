@@ -1,7 +1,7 @@
 "use server";
 
 import { connectToDatabase } from "@/lib/database/db-connection";
-import Subject from "../database/models/Subject.ts";
+import Subject from "../database/models/Subject";
 import { subject } from "../types";
 import { revalidatePath } from "next/cache";
 import { Types } from "mongoose";
