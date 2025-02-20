@@ -1,7 +1,7 @@
 "use server";
 import bcrypt from "bcrypt";
 import { connectToDatabase } from "../database/db-connection";
-import Admin from "../database/models/Admin";
+import Admin from "../database/models/Admin.ts";
 
 export async function getAdmin(email: string, password: string) {
   try {
